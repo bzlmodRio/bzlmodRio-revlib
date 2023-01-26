@@ -1,0 +1,19 @@
+cc_binary(
+    name = "main",
+    srcs = ["main.cpp"],
+    tags = ["no-sandbox"],
+    deps = ["@bzlmodrio-revlib//libraries/cpp/revlib-cpp"],
+)
+
+cc_test(
+    name = "test",
+    srcs = ["test.cpp"],
+    tags = [
+        "bazelrio-cpp-test",
+        "no-sandbox",
+    ],
+    deps = [
+        "@bzlmodrio-revlib//libraries/cpp/revlib-cpp",
+        "@googletest//:gtest_main",
+    ],
+)

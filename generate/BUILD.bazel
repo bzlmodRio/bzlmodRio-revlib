@@ -1,0 +1,26 @@
+py_library(
+    name = "get_rev_dependencies",
+    srcs = ["get_rev_dependencies.py"],
+    deps = [
+        "@bzlmodrio-allwpilib-gentool//:get_allwpilib_dependencies",
+        "@bzlmodrio-gentool//bazelrio_gentool",
+    ],
+)
+
+py_binary(
+    name = "generate",
+    srcs = ["generate.py"],
+    deps = [
+        ":get_rev_dependencies",
+        "@bzlmodrio-gentool//bazelrio_gentool",
+    ],
+)
+
+py_binary(
+    name = "publish",
+    srcs = ["publish.py"],
+    deps = [
+        ":get_rev_dependencies",
+        "@bzlmodrio-gentool//bazelrio_gentool",
+    ],
+)

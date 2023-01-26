@@ -1,0 +1,26 @@
+alias(
+    name = "revlib-cpp",
+    actual = ":shared",
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "shared",
+    linkstatic = 1,
+    visibility = ["//visibility:public"],
+    deps = [
+        "@bzlmodrio-allwpilib//libraries/cpp/wpilibc:shared",
+        "@bzlmodrio-revlib//private/cpp/REVLib-cpp:shared",
+        "@bzlmodrio-revlib//private/cpp/REVLib-driver:shared",
+    ],
+)
+
+cc_library(
+    name = "jni",
+    visibility = ["//visibility:public"],
+    deps = select({
+        "//conditions:default": [
+            "//private/cpp/REVLib-driver:shared",
+        ],
+    }),
+)
