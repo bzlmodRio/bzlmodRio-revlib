@@ -3,8 +3,8 @@ load("@bazel_tools//tools/build_defs/repo:jvm.bzl", "jvm_maven_import_external")
 def __setup_bzlmodrio_revlib_java_dependencies(mctx):
     jvm_maven_import_external(
         name = "com_revrobotics_frc_revlib_java",
-        artifact = "com.revrobotics.frc:REVLib-java:2022.1.0",
-        artifact_sha256 = "fae2e0d0fa7e70512c3373f963b8f69f37faf97979528e94e3520b21eb6d1026",
+        artifact = "com.revrobotics.frc:REVLib-java:2022.1.1",
+        artifact_sha256 = "7806c05b3a129dc8a2fa4e9aca687332a21184b31a48052989d3abacd4aff52f",
         server_urls = ["https://maven.revrobotics.com"],
     )
 
