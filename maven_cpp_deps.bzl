@@ -63,127 +63,127 @@ def __setup_bzlmodrio_revlib_cpp_dependencies(mctx):
     maybe(
         http_archive,
         "bazelrio_com_revrobotics_frc_revlib-cpp_headers",
-        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2022.0.0/REVLib-cpp-2022.0.0-headers.zip",
-        sha256 = "fc8673ee4f3fbe645b20d1ecf100844c6152b22d661b2acd3a4ad0a7ad71e7cb",
+        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2022.1.0/REVLib-cpp-2022.1.0-headers.zip",
+        sha256 = "f21d4a0fbdfc3cf127a7f8664bdb9ce43183285ed9353426660faf394648a5c7",
         build_file_content = cc_library_headers,
     )
     maybe(
         http_archive,
         "bazelrio_com_revrobotics_frc_revlib-cpp_windowsx86-64",
-        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2022.0.0/REVLib-cpp-2022.0.0-windowsx86-64.zip",
-        sha256 = "3f8572c8fd8a0cd241e849b410128072e3c3896cbd63f76635bc2fb55c46c015",
+        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2022.1.0/REVLib-cpp-2022.1.0-windowsx86-64.zip",
+        sha256 = "70566c4d51a0f7a417b59e640251f16378094805a3daedeeb41e7ce0ad9c4e10",
         build_file_content = cc_library_shared,
     )
     maybe(
         http_archive,
         "bazelrio_com_revrobotics_frc_revlib-cpp_windowsx86-64static",
-        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2022.0.0/REVLib-cpp-2022.0.0-windowsx86-64static.zip",
-        sha256 = "3e319f63611aad25e268e2d8936eaf5e02a97605c7f3fdd675ab55af5eabd8f2",
+        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2022.1.0/REVLib-cpp-2022.1.0-windowsx86-64static.zip",
+        sha256 = "caa7a5c68beee46f46e3bf229cbdf7751b13e21c8aec641fe7dbc61074961db3",
         build_file_content = cc_library_static,
     )
     maybe(
         http_archive,
         "bazelrio_com_revrobotics_frc_revlib-cpp_linuxx86-64",
-        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2022.0.0/REVLib-cpp-2022.0.0-linuxx86-64.zip",
-        sha256 = "276ed5fc658d404a1bfd9ec645aa4e22ecca57078d5a117e336f3d85aa7e1bdb",
+        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2022.1.0/REVLib-cpp-2022.1.0-linuxx86-64.zip",
+        sha256 = "d59a4527bc25d84186f0d41d69be0484a29d5c105fc8ff5e60beea0538854edd",
         build_file_content = cc_library_shared,
     )
     maybe(
         http_archive,
         "bazelrio_com_revrobotics_frc_revlib-cpp_linuxx86-64static",
-        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2022.0.0/REVLib-cpp-2022.0.0-linuxx86-64static.zip",
-        sha256 = "afa757da9c3f88f18b612e94afab6c56c0996f1174c4c867f251d2d8f348b9a8",
+        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2022.1.0/REVLib-cpp-2022.1.0-linuxx86-64static.zip",
+        sha256 = "7b44ba7ff66a2c283b5fdbb06fff6e667dd2099d73d79442fd64136a1abd7889",
         build_file_content = cc_library_static,
     )
     maybe(
         http_archive,
         "bazelrio_com_revrobotics_frc_revlib-cpp_linuxathena",
-        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2022.0.0/REVLib-cpp-2022.0.0-linuxathena.zip",
-        sha256 = "8730494bff51e7fbf67c0eb2bd83edd67ce81a20cbe6d6b69b6f3d1a19112f64",
+        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2022.1.0/REVLib-cpp-2022.1.0-linuxathena.zip",
+        sha256 = "97494b52c18de8170fac449f579ed022c67ad361c3966b2eeb8153485815a234",
         build_file_content = cc_library_shared,
     )
     maybe(
         http_archive,
         "bazelrio_com_revrobotics_frc_revlib-cpp_linuxathenastatic",
-        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2022.0.0/REVLib-cpp-2022.0.0-linuxathenastatic.zip",
-        sha256 = "781ea640501c62b6f231d4946fb9be86de627142f70ab43081b64f432beb62e7",
+        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2022.1.0/REVLib-cpp-2022.1.0-linuxathenastatic.zip",
+        sha256 = "16add9024cd60baddda69b52cc3bc8fb062a70ee2866330a86415e087d0cc266",
         build_file_content = cc_library_static,
     )
     maybe(
         http_archive,
         "bazelrio_com_revrobotics_frc_revlib-cpp_osxx86-64",
-        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2022.0.0/REVLib-cpp-2022.0.0-osxx86-64.zip",
-        sha256 = "3c319715a80c6ce5323b683cf52621d2cff6a602c00bd547499e886ec5cbbd0a",
+        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2022.1.0/REVLib-cpp-2022.1.0-osxx86-64.zip",
+        sha256 = "46db303a9edce305420f0b30c86863d36535ffc4b4efd39f26ba905c60f5b83f",
         build_file_content = cc_library_shared,
     )
     maybe(
         http_archive,
         "bazelrio_com_revrobotics_frc_revlib-cpp_osxx86-64static",
-        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2022.0.0/REVLib-cpp-2022.0.0-osxx86-64static.zip",
-        sha256 = "6e2cf545a5fd9afb1123d6e0b8005d837371aacd893b97923f86344399bfee02",
+        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2022.1.0/REVLib-cpp-2022.1.0-osxx86-64static.zip",
+        sha256 = "5cd88ccd45d3de4b3a6fed1315989342cf1dc5dfe97f64e12351f6e8dc882251",
         build_file_content = cc_library_static,
     )
     maybe(
         http_archive,
         "bazelrio_com_revrobotics_frc_revlib-driver_headers",
-        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2022.0.0/REVLib-driver-2022.0.0-headers.zip",
-        sha256 = "6b1737ce847cbd651ad0a84c3e7d69ec5ee703f1955afbbca440f33597d9c8bf",
+        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2022.1.0/REVLib-driver-2022.1.0-headers.zip",
+        sha256 = "34206a0e8e7dfd782784eb68a36bd8a9b87d586c9b7fadb06f5a75faa61af288",
         build_file_content = cc_library_headers,
     )
     maybe(
         http_archive,
         "bazelrio_com_revrobotics_frc_revlib-driver_windowsx86-64",
-        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2022.0.0/REVLib-driver-2022.0.0-windowsx86-64.zip",
-        sha256 = "ee60b980b8026010dcbefbcf805a7fee488d12bb0a8592929c607bf88841e4ff",
+        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2022.1.0/REVLib-driver-2022.1.0-windowsx86-64.zip",
+        sha256 = "e34b3478dbbf735cac3b5bf380ea009b9cb434f8807e1f889ec5e3f5be464239",
         build_file_content = cc_library_shared,
     )
     maybe(
         http_archive,
         "bazelrio_com_revrobotics_frc_revlib-driver_windowsx86-64static",
-        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2022.0.0/REVLib-driver-2022.0.0-windowsx86-64static.zip",
-        sha256 = "0749820dae3d7239587b6a92b01b62d3641676ea268408f9042ccb10dc46d05f",
+        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2022.1.0/REVLib-driver-2022.1.0-windowsx86-64static.zip",
+        sha256 = "501a0e62bf49c3a318e9c35d96e091b5da6026ba111190e5a33895949d3968fe",
         build_file_content = cc_library_static,
     )
     maybe(
         http_archive,
         "bazelrio_com_revrobotics_frc_revlib-driver_linuxx86-64",
-        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2022.0.0/REVLib-driver-2022.0.0-linuxx86-64.zip",
-        sha256 = "c18a22fd86ef841931a318ff91e0cd18defa2bd802ceae593350ed8c5c70dc6e",
+        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2022.1.0/REVLib-driver-2022.1.0-linuxx86-64.zip",
+        sha256 = "1d5e25a6391e26e658f5d92f90a57d8cf2f54e4529926c16453c91ca5447c2ad",
         build_file_content = cc_library_shared,
     )
     maybe(
         http_archive,
         "bazelrio_com_revrobotics_frc_revlib-driver_linuxx86-64static",
-        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2022.0.0/REVLib-driver-2022.0.0-linuxx86-64static.zip",
-        sha256 = "e0cc41288c171c6e6f42c3c3f1175f88279c0ea2ac6ce7f2f02129c3d07de72c",
+        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2022.1.0/REVLib-driver-2022.1.0-linuxx86-64static.zip",
+        sha256 = "0c373cb787cdd68e7471a464efbeb5112470abfed5bc4ddc5039b48387f0a408",
         build_file_content = cc_library_static,
     )
     maybe(
         http_archive,
         "bazelrio_com_revrobotics_frc_revlib-driver_linuxathena",
-        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2022.0.0/REVLib-driver-2022.0.0-linuxathena.zip",
-        sha256 = "ff5296b7a76f3d49a23ab337a58ecfaafdbe5a87e513802b88294b3fe6ab6533",
+        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2022.1.0/REVLib-driver-2022.1.0-linuxathena.zip",
+        sha256 = "ffd25a01abcced33685bf37b4f0e8b02bd9b9de96f988328793ddc71313a502f",
         build_file_content = cc_library_shared,
     )
     maybe(
         http_archive,
         "bazelrio_com_revrobotics_frc_revlib-driver_linuxathenastatic",
-        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2022.0.0/REVLib-driver-2022.0.0-linuxathenastatic.zip",
-        sha256 = "30109f4e2f64b47ef593e886183833a7219645e5d85450873e38e26148e28a5f",
+        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2022.1.0/REVLib-driver-2022.1.0-linuxathenastatic.zip",
+        sha256 = "01fb41380fe87b53868974b752c89c3d895f2a4f206dc4a220ae9704df8cf06d",
         build_file_content = cc_library_static,
     )
     maybe(
         http_archive,
         "bazelrio_com_revrobotics_frc_revlib-driver_osxx86-64",
-        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2022.0.0/REVLib-driver-2022.0.0-osxx86-64.zip",
-        sha256 = "67f19a2688ca32f7e2e718afcf92ea7ab35dc92ceab29be1477e36a3c261bd7b",
+        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2022.1.0/REVLib-driver-2022.1.0-osxx86-64.zip",
+        sha256 = "f5d26a4f962f4c5935efd98ada3602bffd1ff317085c99949fbc686746a437fc",
         build_file_content = cc_library_shared,
     )
     maybe(
         http_archive,
         "bazelrio_com_revrobotics_frc_revlib-driver_osxx86-64static",
-        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2022.0.0/REVLib-driver-2022.0.0-osxx86-64static.zip",
-        sha256 = "b86d65a5e27c6da4194af022d8676f9a4fd65850e3851dfd33e36cf3b511354b",
+        url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2022.1.0/REVLib-driver-2022.1.0-osxx86-64static.zip",
+        sha256 = "59685c6ad2e2b849898b556f19d8018f5fcf166626c20788304824a931a2a12d",
         build_file_content = cc_library_static,
     )
 
