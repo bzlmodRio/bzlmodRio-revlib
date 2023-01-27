@@ -16,7 +16,7 @@ def get_rev_dependencies(
     group = vendordep_dependency(
         "bzlmodrio-revlib",
         os.path.join(SCRIPT_DIR, f"vendor_dep.json"),
-        year=2022,
+        year=2023,
         fail_on_hash_miss=False,
         has_static_libraries=True,
     )
