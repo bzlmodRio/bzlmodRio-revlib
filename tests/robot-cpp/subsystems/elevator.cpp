@@ -33,7 +33,7 @@ Elevator::Elevator()
       m_encoder(m_motor.GetEncoder()),
       m_elevatorSim(kElevatorGearbox, kElevatorGearing, kCarriageMass,
                     kElevatorDrumRadius, kMinElevatorHeight,
-                    kMaxElevatorHeight) {
+                    kMaxElevatorHeight, true) {
   m_controller.SetTolerance(0.005);
 
   SetName("Elevator");

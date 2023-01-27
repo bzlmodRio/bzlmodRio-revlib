@@ -1,36 +1,44 @@
 module(
     name = "bzlmodrio-revlib",
-    version = "2022.1.1",
+    version = "2023.1.1",
     compatibility_level = 2022,
 )
 
 bazel_dep(name = "platforms", version = "0.0.4")
 bazel_dep(name = "rules_java", version = "5.1.0")
 bazel_dep(name = "rules_bazelrio", version = "0.0.9")
-bazel_dep(name = "rules_roborio_toolchain", version = "2022-1")
-bazel_dep(name = "bzlmodrio-allwpilib", version = "2022.3.1")
-bazel_dep(name = "bzlmodrio-opencv", version = "4.5.2-1")
-bazel_dep(name = "bzlmodrio-ni", version = "2022.4.0")
+bazel_dep(name = "rules_roborio_toolchain", version = "2023-7")
+bazel_dep(name = "bzlmodrio-allwpilib", version = "2023.1.1")
+bazel_dep(name = "bzlmodrio-opencv", version = "4.6.0-4")
+bazel_dep(name = "bzlmodrio-ni", version = "2023.3.0")
 
 setup_bzlmodrio_revlib_cpp_dependencies = use_extension("//:maven_cpp_deps.bzl", "setup_bzlmodrio_revlib_cpp_dependencies")
 use_repo(
     setup_bzlmodrio_revlib_cpp_dependencies,
     "bazelrio_com_revrobotics_frc_revlib-cpp_headers",
+    "bazelrio_com_revrobotics_frc_revlib-cpp_linuxarm32",
+    "bazelrio_com_revrobotics_frc_revlib-cpp_linuxarm32static",
+    "bazelrio_com_revrobotics_frc_revlib-cpp_linuxarm64",
+    "bazelrio_com_revrobotics_frc_revlib-cpp_linuxarm64static",
     "bazelrio_com_revrobotics_frc_revlib-cpp_linuxathena",
     "bazelrio_com_revrobotics_frc_revlib-cpp_linuxathenastatic",
     "bazelrio_com_revrobotics_frc_revlib-cpp_linuxx86-64",
     "bazelrio_com_revrobotics_frc_revlib-cpp_linuxx86-64static",
-    "bazelrio_com_revrobotics_frc_revlib-cpp_osxx86-64",
-    "bazelrio_com_revrobotics_frc_revlib-cpp_osxx86-64static",
+    "bazelrio_com_revrobotics_frc_revlib-cpp_osxuniversal",
+    "bazelrio_com_revrobotics_frc_revlib-cpp_osxuniversalstatic",
     "bazelrio_com_revrobotics_frc_revlib-cpp_windowsx86-64",
     "bazelrio_com_revrobotics_frc_revlib-cpp_windowsx86-64static",
     "bazelrio_com_revrobotics_frc_revlib-driver_headers",
+    "bazelrio_com_revrobotics_frc_revlib-driver_linuxarm32",
+    "bazelrio_com_revrobotics_frc_revlib-driver_linuxarm32static",
+    "bazelrio_com_revrobotics_frc_revlib-driver_linuxarm64",
+    "bazelrio_com_revrobotics_frc_revlib-driver_linuxarm64static",
     "bazelrio_com_revrobotics_frc_revlib-driver_linuxathena",
     "bazelrio_com_revrobotics_frc_revlib-driver_linuxathenastatic",
     "bazelrio_com_revrobotics_frc_revlib-driver_linuxx86-64",
     "bazelrio_com_revrobotics_frc_revlib-driver_linuxx86-64static",
-    "bazelrio_com_revrobotics_frc_revlib-driver_osxx86-64",
-    "bazelrio_com_revrobotics_frc_revlib-driver_osxx86-64static",
+    "bazelrio_com_revrobotics_frc_revlib-driver_osxuniversal",
+    "bazelrio_com_revrobotics_frc_revlib-driver_osxuniversalstatic",
     "bazelrio_com_revrobotics_frc_revlib-driver_windowsx86-64",
     "bazelrio_com_revrobotics_frc_revlib-driver_windowsx86-64static",
 )

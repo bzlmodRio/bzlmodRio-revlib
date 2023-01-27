@@ -56,7 +56,7 @@ public class Elevator extends PIDSubsystem {
       m_encoderPositionSim = deviceSim.getDouble("Position");
       m_elevatorSim = new ElevatorSim(kElevatorGearbox, kElevatorGearing, kCarriageMass,
               kElevatorDrumRadius, kMinElevatorHeight,
-              kMaxElevatorHeight);
+              kMaxElevatorHeight, true);
     }
   }
 
