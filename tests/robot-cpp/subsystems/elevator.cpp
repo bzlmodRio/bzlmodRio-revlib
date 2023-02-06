@@ -1,10 +1,11 @@
 #include "robot-cpp/subsystems/elevator.hpp"
-#include "robot-cpp/subsystems/ports.hpp"
 
 #include <frc/RobotController.h>
 #include <frc/controller/PIDController.h>
 #include <frc/livewindow/LiveWindow.h>
 #include <frc/smartdashboard/SmartDashboard.h>
+
+#include "robot-cpp/subsystems/ports.hpp"
 
 namespace {
 constexpr double kP = 5.0;
@@ -25,15 +26,15 @@ constexpr double kArmEncoderDistPerPulse =
     2.0 * 3.14 * kElevatorDrumRadius.to<double>() / 4096.0;
 
 frc::DCMotor kElevatorGearbox = frc::DCMotor::Vex775Pro(4);
-}  // namespace
+} // namespace
 
 Elevator::Elevator()
     : frc2::PIDSubsystem(frc2::PIDController{kP, kI, kD}),
       m_motor{kElevatorMotorPort, rev::CANSparkMax::MotorType::kBrushless},
       m_encoder(m_motor.GetEncoder()),
       m_elevatorSim(kElevatorGearbox, kElevatorGearing, kCarriageMass,
-                    kElevatorDrumRadius, kMinElevatorHeight,
-                    kMaxElevatorHeight, true) {
+                    kElevatorDrumRadius, kMinElevatorHeight, kMaxElevatorHeight,
+                    true) {
   m_controller.SetTolerance(0.005);
 
   SetName("Elevator");
@@ -43,7 +44,6 @@ void Elevator::Log() {
   frc::SmartDashboard::PutNumber("Elevator Height (m)",
                                  GetElevatorHeight().to<double>());
 }
-
 
 units::meter_t Elevator::GetElevatorHeight() {
   return units::meter_t{m_encoder.GetPosition()};

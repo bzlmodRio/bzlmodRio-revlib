@@ -1,15 +1,14 @@
 #pragma once
 
-#include <frc2/command/PIDSubsystem.h>
 #include <frc/simulation/ElevatorSim.h>
+#include <frc2/command/PIDSubsystem.h>
 #include <hal/SimDevice.h>
 #include <rev/CANSparkMax.h>
 #include <rev/SparkMaxRelativeEncoder.h>
-
 #include <units/length.h>
 
 class Elevator : public frc2::PIDSubsystem {
- public:
+public:
   Elevator();
 
   void Stop();
@@ -22,9 +21,9 @@ class Elevator : public frc2::PIDSubsystem {
 
   void SimulationPeriodic() override;
 
-   units::meter_t GetElevatorHeight();
+  units::meter_t GetElevatorHeight();
 
- private:
+private:
   void Log();
 
   rev::CANSparkMax m_motor;

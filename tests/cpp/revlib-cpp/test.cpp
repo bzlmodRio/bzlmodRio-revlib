@@ -1,7 +1,7 @@
 
-#include "gtest/gtest.h"
 #include "rev/CANSparkMax.h"
+#include "gtest/gtest.h"
 
-TEST(BasicTest, BasicTest) {
-    rev::CANSparkMax sparkMax{3, rev::CANSparkMax::MotorType::kBrushless};
+TEST(BasicTest, Basic) {
+  rev::CANSparkMax sparkMax{3, rev::CANSparkMax::MotorType::kBrushless};
 }

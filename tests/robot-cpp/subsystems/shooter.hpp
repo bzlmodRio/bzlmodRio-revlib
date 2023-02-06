@@ -3,13 +3,12 @@
 #include <frc/simulation/FlywheelSim.h>
 #include <frc2/command/SubsystemBase.h>
 #include <hal/SimDevice.h>
-
 #include <rev/CANSparkMax.h>
 #include <rev/SparkMaxPIDController.h>
 #include <rev/SparkMaxRelativeEncoder.h>
 
 class Shooter : public frc2::SubsystemBase {
- public:
+public:
   Shooter();
 
   void Periodic() override;
@@ -21,7 +20,7 @@ class Shooter : public frc2::SubsystemBase {
 
   units::revolutions_per_minute_t GetRpm();
 
- private:
+private:
   void Log();
 
   rev::CANSparkMax m_motor;
