@@ -31,13 +31,26 @@ def main():
         use_local_ni=args.use_local_ni,
     )
 
-    mandetory_dependencies = create_default_mandatory_settings(GenericCliArgs(args))
+    mandatory_dependencies = create_default_mandatory_settings(GenericCliArgs(args))
 
     clean_existing_version(REPO_DIR)
     generate_module_project_files(
-        REPO_DIR, group, mandetory_dependencies=mandetory_dependencies
+        REPO_DIR, group, mandatory_dependencies=mandatory_dependencies
     )
     generate_meta_deps(output_dir, group, force_tests=args.force_tests)
+
+    manual_cleanup(REPO_DIR)
+
+
+def manual_cleanup(repo_dir):
+    # Manual cleanup
+    cleanup_file = os.path.join(repo_dir, "libraries", "cpp", "revlib-cpp", "BUILD.bazel")
+    with open(cleanup_file, 'r') as f:
+        contents = f.read()
+
+    contents = contents.replace("@bzlmodrio-revlib//libraries", "@bzlmodrio-revlib//private")
+    with open(cleanup_file, 'w') as f:
+        f.write(contents)
 
 
 if __name__ == "__main__":
