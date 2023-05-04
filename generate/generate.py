@@ -44,12 +44,16 @@ def main():
 
 def manual_cleanup(repo_dir):
     # Manual cleanup
-    cleanup_file = os.path.join(repo_dir, "libraries", "cpp", "revlib-cpp", "BUILD.bazel")
-    with open(cleanup_file, 'r') as f:
+    cleanup_file = os.path.join(
+        repo_dir, "libraries", "cpp", "revlib-cpp", "BUILD.bazel"
+    )
+    with open(cleanup_file, "r") as f:
         contents = f.read()
 
-    contents = contents.replace("@bzlmodrio-revlib//libraries", "@bzlmodrio-revlib//private")
-    with open(cleanup_file, 'w') as f:
+    contents = contents.replace(
+        "@bzlmodrio-revlib//libraries", "@bzlmodrio-revlib//private"
+    )
+    with open(cleanup_file, "w") as f:
         f.write(contents)
 
 
