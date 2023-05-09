@@ -1,5 +1,5 @@
 import os
-from get_rev_dependencies import get_rev_dependencies
+from get_revlib_dependencies import get_revlib_dependencies
 from bazelrio_gentool.publish_module import publish_module
 from bazelrio_gentool.utils import TEMPLATE_BASE_DIR
 
@@ -10,7 +10,7 @@ def main():
         SCRIPT_DIR, "..", "..", "..", "bazel-central-registry"
     )
 
-    group = get_rev_dependencies()
+    group = get_revlib_dependencies()
 
     module_template = os.path.join(
         TEMPLATE_BASE_DIR, "library_wrapper", "MODULE.bazel.jinja2"
