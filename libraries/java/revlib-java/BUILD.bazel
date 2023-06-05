@@ -1,5 +1,3 @@
-load("@rules_java//java:defs.bzl", "java_import")
-
 java_import(
     name = "revlib-java",
     jars = ["@com_revrobotics_frc_revlib_java//jar:file"],
