@@ -7,7 +7,7 @@ from bazelrio_gentool.deps.dependency_container import (
 )
 
 
-def get_rev_dependencies(
+def get_revlib_dependencies(
     use_local_allwpilib=False, use_local_opencv=False, use_local_ni=False
 ):
     SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
