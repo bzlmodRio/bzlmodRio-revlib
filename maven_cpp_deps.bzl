@@ -33,26 +33,43 @@ cc_library(
 """
 
 cc_library_shared = """
-static_srcs = glob(["**/*.lib", "**/*.a"], exclude=["**/*jni.lib"])
-shared_srcs = glob(["**/*.dll", "**/*.so*", "**/*.dylib"], exclude=["**/*jni.dll", "**/*jni.so", "**/*.so.debug", "**/libopencv_java*.dylib"])
-shared_jni_srcs = glob(["**/*jni.dll", "**/*jni.so*", "**/*.jni.dylib", "**/libopencv_java*.dylib"], exclude=["**/*.so.debug"])
+JNI_PATTERN=[
+    "**/*jni.dll",
+    "**/*jni.so*",
+    "**/*jni.dylib",
+    "**/*_java*.dll",
+    "**/lib*_java*.dylib",
+    "**/lib*_java*.so",
+]
 
-cc_library(
+static_srcs = glob([
+        "**/*.lib",
+        "**/*.a"
+    ],
+    exclude=["**/*jni.lib"]
+)
+shared_srcs = glob([
+        "**/*.dll",
+        "**/*.so*",
+        "**/*.dylib",
+    ],
+    exclude=JNI_PATTERN + ["**/*.so.debug"]
+)
+shared_jni_srcs = glob(JNI_PATTERN, exclude=["**/*.so.debug"])
+
+filegroup(
     name = "static_libs",
     srcs = static_srcs,
     visibility = ["//visibility:public"],
 )
 
-cc_library(
+filegroup(
     name = "shared_libs",
     srcs = shared_srcs,
     visibility = ["//visibility:public"],
-    deps = [
-        ":static_libs",
-    ]
 )
 
-cc_library(
+filegroup(
     name = "shared_jni_libs",
     srcs = shared_jni_srcs,
     visibility = ["//visibility:public"],
@@ -143,6 +160,18 @@ def __setup_bzlmodrio_revlib_cpp_dependencies(mctx):
         url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2023.1.3/REVLib-cpp-2023.1.3-osxuniversal.zip",
         sha256 = "4664e8e80a84fd1d9aff607cc9722d39b2d96fde72b57491ebd7f5c346ee6112",
         build_file_content = cc_library_shared,
+        patch_cmds = [
+            "install_name_tool -id @rpath/libREVLib.dylib osx/universal/shared/libREVLib.dylib",
+            "install_name_tool -change libREVLibDriver.dylib @rpath/libREVLibDriver.dylib osx/universal/shared/libREVLib.dylib",
+
+            "install_name_tool -change libwpilibc.dylib @rpath/libwpilibc.dylib osx/universal/shared/libREVLib.dylib",
+            "install_name_tool -change libcscore.dylib @rpath/libcscore.dylib osx/universal/shared/libREVLib.dylib",
+            "install_name_tool -change libwpiHal.dylib @rpath/libwpiHal.dylib osx/universal/shared/libREVLib.dylib",
+            "install_name_tool -change libntcore.dylib @rpath/libntcore.dylib osx/universal/shared/libREVLib.dylib",
+            "install_name_tool -change libwpimath.dylib @rpath/libwpimath.dylib osx/universal/shared/libREVLib.dylib",
+            "install_name_tool -change libwpinet.dylib @rpath/libwpinet.dylib osx/universal/shared/libREVLib.dylib",
+            "install_name_tool -change libwpiutil.dylib @rpath/libwpiutil.dylib osx/universal/shared/libREVLib.dylib",
+        ],
     )
     maybe(
         http_archive,
@@ -234,6 +263,12 @@ def __setup_bzlmodrio_revlib_cpp_dependencies(mctx):
         url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2023.1.3/REVLib-driver-2023.1.3-osxuniversal.zip",
         sha256 = "9f7b90d0f4d3c83e0409e6fcb1ffaefd300c9d2127139b1e4caa9103cd1c929d",
         build_file_content = cc_library_shared,
+        patch_cmds = [
+            "install_name_tool -id @rpath/libREVLibDriver.dylib osx/universal/shared/libREVLibDriver.dylib",
+            "install_name_tool -change libwpimath.dylib @rpath/libwpimath.dylib osx/universal/shared/libREVLibDriver.dylib",
+            "install_name_tool -change libwpiHal.dylib @rpath/libwpiHal.dylib osx/universal/shared/libREVLibDriver.dylib",
+            "install_name_tool -change libwpiutil.dylib @rpath/libwpiutil.dylib osx/universal/shared/libREVLibDriver.dylib",
+        ],
     )
     maybe(
         http_archive,
