@@ -163,7 +163,6 @@ def __setup_bzlmodrio_revlib_cpp_dependencies(mctx):
         patch_cmds = [
             "install_name_tool -id @rpath/libREVLib.dylib osx/universal/shared/libREVLib.dylib",
             "install_name_tool -change libREVLibDriver.dylib @rpath/libREVLibDriver.dylib osx/universal/shared/libREVLib.dylib",
-
             "install_name_tool -change libwpilibc.dylib @rpath/libwpilibc.dylib osx/universal/shared/libREVLib.dylib",
             "install_name_tool -change libcscore.dylib @rpath/libcscore.dylib osx/universal/shared/libREVLib.dylib",
             "install_name_tool -change libwpiHal.dylib @rpath/libwpiHal.dylib osx/universal/shared/libREVLib.dylib",
