@@ -29,6 +29,7 @@ def get_revlib_dependencies(
         has_static_libraries=True,
         install_name_lookup = {
             "REVLib-cpp": dict(artifact_install_name="REVLib", deps=[
+                "REVLib-driver",
                 allwpilib_dependency.container.get_cc_dependency("wpilibc-cpp"),
             ]),
             "REVLib-driver": dict(artifact_install_name="REVLibDriver", deps=[
