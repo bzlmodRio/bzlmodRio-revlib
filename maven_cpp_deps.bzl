@@ -160,18 +160,6 @@ def __setup_bzlmodrio_revlib_cpp_dependencies(mctx):
         url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2023.1.3/REVLib-cpp-2023.1.3-osxuniversal.zip",
         sha256 = "4664e8e80a84fd1d9aff607cc9722d39b2d96fde72b57491ebd7f5c346ee6112",
         build_file_content = cc_library_shared,
-        patch_cmds = [
-            "install_name_tool -id @rpath/libREVLib.dylib osx/universal/shared/libREVLib.dylib",
-            "install_name_tool -change libREVLibDriver.dylib @rpath/libREVLibDriver.dylib osx/universal/shared/libREVLib.dylib",
-            "install_name_tool -change libcameraserver.dylib @rpath/libcameraserver.dylib osx/universal/shared/libREVLib.dylib",
-            "install_name_tool -change libcscore.dylib @rpath/libcscore.dylib osx/universal/shared/libREVLib.dylib",
-            "install_name_tool -change libntcore.dylib @rpath/libntcore.dylib osx/universal/shared/libREVLib.dylib",
-            "install_name_tool -change libwpiHal.dylib @rpath/libwpiHal.dylib osx/universal/shared/libREVLib.dylib",
-            "install_name_tool -change libwpilibc.dylib @rpath/libwpilibc.dylib osx/universal/shared/libREVLib.dylib",
-            "install_name_tool -change libwpimath.dylib @rpath/libwpimath.dylib osx/universal/shared/libREVLib.dylib",
-            "install_name_tool -change libwpinet.dylib @rpath/libwpinet.dylib osx/universal/shared/libREVLib.dylib",
-            "install_name_tool -change libwpiutil.dylib @rpath/libwpiutil.dylib osx/universal/shared/libREVLib.dylib",
-        ],
     )
     maybe(
         http_archive,
@@ -263,12 +251,6 @@ def __setup_bzlmodrio_revlib_cpp_dependencies(mctx):
         url = "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2023.1.3/REVLib-driver-2023.1.3-osxuniversal.zip",
         sha256 = "9f7b90d0f4d3c83e0409e6fcb1ffaefd300c9d2127139b1e4caa9103cd1c929d",
         build_file_content = cc_library_shared,
-        patch_cmds = [
-            "install_name_tool -id @rpath/libREVLibDriver.dylib osx/universal/shared/libREVLibDriver.dylib",
-            "install_name_tool -change libwpiHal.dylib @rpath/libwpiHal.dylib osx/universal/shared/libREVLibDriver.dylib",
-            "install_name_tool -change libwpimath.dylib @rpath/libwpimath.dylib osx/universal/shared/libREVLibDriver.dylib",
-            "install_name_tool -change libwpiutil.dylib @rpath/libwpiutil.dylib osx/universal/shared/libREVLibDriver.dylib",
-        ],
     )
     maybe(
         http_archive,
