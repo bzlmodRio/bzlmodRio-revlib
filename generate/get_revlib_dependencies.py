@@ -8,21 +8,24 @@ from bazelrio_gentool.deps.dependency_container import (
 
 
 def get_revlib_dependencies(
-    use_local_allwpilib=False, use_local_opencv=False, use_local_ni=False,
-    allwpilib_version_override = "2023.3.2",
-    opencv_version_override = "4.6.0-4"
+    use_local_allwpilib=False,
+    use_local_opencv=False,
+    use_local_ni=False,
+    allwpilib_version_override="2023.3.2",
+    opencv_version_override="4.6.0-4",
 ):
     SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 
     allwpilib_dependency = ModuleDependency(
         get_allwpilib_dependencies(
-            use_local_opencv=use_local_opencv, use_local_ni=use_local_ni,
-            opencv_version_override = opencv_version_override,
+            use_local_opencv=use_local_opencv,
+            use_local_ni=use_local_ni,
+            opencv_version_override=opencv_version_override,
         ),
         use_local_version=use_local_allwpilib,
         local_rel_folder="../../libraries/bzlmodRio-allwpilib",
         remote_repo="bzlmodRio-allwpilib",
-        override_version = allwpilib_version_override
+        override_version=allwpilib_version_override,
     )
 
     group = vendordep_dependency(
