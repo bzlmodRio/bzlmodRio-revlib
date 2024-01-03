@@ -26,7 +26,8 @@ frc::DCMotor kElevatorGearbox = frc::DCMotor::Vex775Pro(4);
 Elevator::Elevator()
     : frc2::PIDSubsystem(frc::PIDController{kP, kI, kD}),
       m_motor{kElevatorMotorPort, rev::CANSparkMax::MotorType::kBrushless},
-      m_encoder(m_motor.GetEncoder(rev::SparkRelativeEncoder::Type::kHallSensor)),
+      m_encoder(
+          m_motor.GetEncoder(rev::SparkRelativeEncoder::Type::kHallSensor)),
       m_elevatorSim(kElevatorGearbox, kElevatorGearing, kCarriageMass,
                     kElevatorDrumRadius, kMinElevatorHeight, kMaxElevatorHeight,
                     true, units::meter_t{0}) {
