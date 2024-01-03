@@ -5,7 +5,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.hal.SimDouble;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
@@ -47,16 +47,16 @@ public class DriveTrain extends SubsystemBase {
   public DriveTrain() {
     m_leftLeader =
         new CANSparkMax(
-            PortMap.kDrivetrainMotorLeftAPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+            PortMap.kDrivetrainMotorLeftAPort, CANSparkLowLevel.MotorType.kBrushless);
     m_leftFollower =
         new CANSparkMax(
-            PortMap.kDrivetrainMotorLeftBPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+            PortMap.kDrivetrainMotorLeftBPort, CANSparkLowLevel.MotorType.kBrushless);
     m_rightLeader =
         new CANSparkMax(
-            PortMap.kDrivetrainMotorRightAPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+            PortMap.kDrivetrainMotorRightAPort, CANSparkLowLevel.MotorType.kBrushless);
     m_rightFollower =
         new CANSparkMax(
-            PortMap.kDrivetrainMotorRightBPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+            PortMap.kDrivetrainMotorRightBPort, CANSparkLowLevel.MotorType.kBrushless);
 
     m_leftFollower.follow(m_leftLeader);
     m_rightFollower.follow(m_rightLeader);

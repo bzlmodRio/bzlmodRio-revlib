@@ -13,7 +13,7 @@ constexpr units::kilogram_square_meter_t kInertia{0.008};
 
 Shooter::Shooter()
     : m_motor{kShooterMotorPort, rev::CANSparkMax::MotorType::kBrushless},
-      m_encoder(m_motor.GetEncoder()), m_controller(m_motor.GetPIDController()),
+      m_encoder(m_motor.GetEncoder(rev::SparkRelativeEncoder::Type::kHallSensor)), m_controller(m_motor.GetPIDController()),
       m_flywheelSim(kGearbox, kGearing, kInertia) {}
 
 void Shooter::Stop() { m_motor.Set(0); }
@@ -21,7 +21,7 @@ void Shooter::Stop() { m_motor.Set(0); }
 void Shooter::SpinAtRpm(units::revolutions_per_minute_t rpm) {
   double rpm_as_double = rpm.to<double>();
   m_controller.SetReference(rpm_as_double,
-                            rev::CANSparkMaxLowLevel::ControlType::kVelocity);
+                            rev::CANSparkLowLevel::ControlType::kVelocity);
 }
 units::revolutions_per_minute_t Shooter::GetRpm() {
   return units::revolutions_per_minute_t{m_encoder.GetVelocity()};

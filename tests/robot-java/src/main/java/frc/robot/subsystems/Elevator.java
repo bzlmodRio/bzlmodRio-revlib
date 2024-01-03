@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.hal.SimDouble;
 import edu.wpi.first.math.controller.PIDController;
@@ -40,7 +40,7 @@ public class Elevator extends PIDSubsystem {
   public Elevator() {
     super(new PIDController(kP, kI, kD));
 
-    m_motor = new CANSparkMax(PortMap.kElevatorMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+    m_motor = new CANSparkMax(PortMap.kElevatorMotorPort, CANSparkLowLevel.MotorType.kBrushless);
     m_encoder = m_motor.getEncoder();
 
     m_encoder.setPositionConversionFactor(kArmEncoderDistPerPulse);

@@ -24,8 +24,8 @@ private:
   void Log();
 
   rev::CANSparkMax m_motor;
-  rev::SparkMaxRelativeEncoder m_encoder;
-  rev::SparkMaxPIDController m_controller;
+  rev::SparkRelativeEncoder m_encoder;
+  rev::SparkPIDController m_controller;
 
   // Sim
   hal::SimDouble m_encoderVelocitySim;
