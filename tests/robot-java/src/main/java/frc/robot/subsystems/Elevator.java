@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel;
+import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.hal.SimDouble;
 import edu.wpi.first.math.controller.PIDController;
