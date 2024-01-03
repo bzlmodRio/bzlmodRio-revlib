@@ -4,10 +4,10 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.SparkPIDController;
 import edu.wpi.first.hal.SimDouble;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.RobotBase;
@@ -33,7 +33,7 @@ public class Shooter extends SubsystemBase {
 
   private final CANSparkMax m_motor;
   private final RelativeEncoder m_encoder;
-  private final SparkMaxPIDController m_pidController;
+  private final SparkPIDController m_pidController;
 
   // Sim
   private SimDouble m_encoderVelocitySim;
@@ -41,7 +41,7 @@ public class Shooter extends SubsystemBase {
 
   /** Create a new claw subsystem. */
   public Shooter() {
-    m_motor = new CANSparkMax(PortMap.kShooterMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+    m_motor = new CANSparkMax(PortMap.kShooterMotorPort, CANSparkLowLevel.MotorType.kBrushless);
     m_encoder = m_motor.getEncoder();
     m_pidController = m_motor.getPIDController();
     m_pidController.setP(kP);
