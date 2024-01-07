@@ -11,7 +11,7 @@ def get_revlib_dependencies(
     use_local_allwpilib=False,
     use_local_opencv=False,
     use_local_ni=False,
-    allwpilib_version_override="2024.1.1-beta-4",
+    allwpilib_version_override="2024.1.1",
     opencv_version_override="2024.4.8.0-1",
 ):
     SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -31,7 +31,6 @@ def get_revlib_dependencies(
     group = vendordep_dependency(
         "bzlmodrio-revlib",
         os.path.join(SCRIPT_DIR, f"vendor_dep.json"),
-        year=2023,
         fail_on_hash_miss=False,
         has_static_libraries=True,
         install_name_lookup={
