@@ -14,7 +14,7 @@ constexpr units::kilogram_square_meter_t kInertia{0.008};
 Shooter::Shooter()
     : m_motor{kShooterMotorPort, rev::CANSparkMax::MotorType::kBrushless},
       m_encoder(
-          m_motor.GetEncoder(rev::SparkRelativeEncoder::Type::kHallSensor)),
+          m_motor.GetEncoder()),
       m_controller(m_motor.GetPIDController()),
       m_flywheelSim(kGearbox, kGearing, kInertia) {}
 
