@@ -27,7 +27,7 @@ def download_dependencies():
     http_archive(
         name = "rules_bzlmodrio_toolchains",
         sha256 = "cd3ff046427e9c6dbc0c86a458c8cf081b8045fc3fb4265d08c0ebfc17f9cb30",
-        url = "https://github.com/bzlmodRio/rules_bzlmodRio_toolchains/releases/download/2024-1/rules_bzlmodRio_toolchains-2024-1.tar.gz",
+        url = "https://github.com/wpilibsuite/rules_bzlmodRio_toolchains/releases/download/2024-1/rules_bzlmodRio_toolchains-2024-1.tar.gz",
     )
 
     ########################
@@ -44,14 +44,14 @@ def download_dependencies():
     http_archive(
         name = "bzlmodrio-opencv",
         sha256 = "761b152ef922e6bb386b79b06830fdf085b905d132d967c31d3ab4f33b8a8366",
-        url = "https://github.com/bzlmodRio/bzlmodRio-opencv/releases/download/2024.4.8.0-1/bzlmodRio-opencv-2024.4.8.0-1.tar.gz",
+        url = "https://github.com/wpilibsuite/bzlmodRio-opencv/releases/download/2024.4.8.0-1/bzlmodRio-opencv-2024.4.8.0-1.tar.gz",
     )
 
     # bzlmodrio-ni
     http_archive(
         name = "bzlmodrio-ni",
         sha256 = "f4101925d260c385f6a5c0a79451692db35f433cab8b8cc4092dd3ab93424559",
-        url = "https://github.com/bzlmodRio/bzlmodRio-ni/releases/download/2024.2.0/bzlmodRio-ni-2024.2.0.tar.gz",
+        url = "https://github.com/wpilibsuite/bzlmodRio-ni/releases/download/2024.2.0/bzlmodRio-ni-2024.2.0.tar.gz",
     )
 
     ########################
