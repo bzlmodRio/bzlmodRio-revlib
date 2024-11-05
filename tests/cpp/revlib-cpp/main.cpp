@@ -3,12 +3,12 @@
 #include <iostream>
 #include <thread>
 
-#include "rev/CANSparkMax.h"
+#include "rev/SparkMax.h"
 
 int main() {
   std::cout << "Hello World" << std::endl;
 
-  rev::CANSparkMax sparkMax{3, rev::CANSparkMax::MotorType::kBrushless};
+  rev::spark::SparkMax sparkMax{3, rev::spark::SparkMax::MotorType::kBrushless};
 
   std::cout << "Running  some loops" << std::endl;
   for (int i = 0; i < 500; ++i) {

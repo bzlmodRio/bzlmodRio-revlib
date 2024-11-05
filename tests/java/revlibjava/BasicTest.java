@@ -1,13 +1,13 @@
 package revlibjava;
 
-import com.revrobotics.CANSparkLowLevel.MotorType;
-import com.revrobotics.CANSparkMax;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.SparkMax;
 import org.junit.jupiter.api.Test;
 
 class BasicTest {
   @Test
   void basicTest() {
-    CANSparkMax sparkMax = new CANSparkMax(1, MotorType.kBrushless);
+    SparkMax sparkMax = new SparkMax(1, MotorType.kBrushless);
     System.out.println(sparkMax);
   }
 }

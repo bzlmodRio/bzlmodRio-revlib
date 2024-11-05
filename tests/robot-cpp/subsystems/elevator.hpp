@@ -1,21 +1,21 @@
 #pragma once
 
 #include <frc/simulation/ElevatorSim.h>
-#include <frc2/command/PIDSubsystem.h>
+#include <frc2/command/Subsystem.h>
 #include <hal/SimDevice.h>
-#include <rev/CANSparkMax.h>
+#include <rev/SparkMax.h>
 #include <rev/SparkRelativeEncoder.h>
 #include <units/length.h>
 
-class Elevator : public frc2::PIDSubsystem {
+class Elevator : public frc2::Subsystem {
 public:
   Elevator();
 
   void Stop();
 
-  double GetMeasurement() override;
+  void GoToHeight(units::meter_t height);
 
-  void UseOutput(double output, double setpoint) override;
+  bool IsAtHeight();
 
   void Periodic() override;
 
@@ -26,9 +26,10 @@ public:
 private:
   void Log();
 
-  rev::CANSparkMax m_motor;
-  rev::SparkRelativeEncoder m_encoder;
-  double m_setpoint{0};
+  rev::spark::SparkMax m_motor;
+  rev::spark::SparkRelativeEncoder m_encoder;
+  rev::spark::SparkClosedLoopController m_controller;
+  units::meter_t m_setpoint{0};
 
   // Sim
   hal::SimDouble m_encoderPositionSim;

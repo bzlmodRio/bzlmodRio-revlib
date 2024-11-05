@@ -1,6 +1,7 @@
 #include "robot-cpp/subsystems/shooter.hpp"
 
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <frc/system/plant/LinearSystemId.h>
 
 #include "robot-cpp/subsystems/ports.hpp"
 
@@ -9,19 +10,23 @@ namespace {
 constexpr frc::DCMotor kGearbox = frc::DCMotor::Vex775Pro(2);
 constexpr double kGearing = 4;
 constexpr units::kilogram_square_meter_t kInertia{0.008};
+
+frc::LinearSystem<1, 1, 1> kPlant{
+    frc::LinearSystemId::FlywheelSystem(kGearbox, kInertia, kGearing)};
 } // namespace
 
 Shooter::Shooter()
-    : m_motor{kShooterMotorPort, rev::CANSparkMax::MotorType::kBrushless},
-      m_encoder(m_motor.GetEncoder()), m_controller(m_motor.GetPIDController()),
-      m_flywheelSim(kGearbox, kGearing, kInertia) {}
+    : m_motor{kShooterMotorPort, rev::spark::SparkMax::MotorType::kBrushless},
+      m_encoder(m_motor.GetEncoder()),
+      m_controller(m_motor.GetClosedLoopController()),
+      m_flywheelSim(kPlant, kGearbox) {}
 
 void Shooter::Stop() { m_motor.Set(0); }
 
 void Shooter::SpinAtRpm(units::revolutions_per_minute_t rpm) {
   double rpm_as_double = rpm.to<double>();
   m_controller.SetReference(rpm_as_double,
-                            rev::CANSparkLowLevel::ControlType::kVelocity);
+                            rev::spark::SparkLowLevel::ControlType::kVelocity);
 }
 units::revolutions_per_minute_t Shooter::GetRpm() {
   return units::revolutions_per_minute_t{m_encoder.GetVelocity()};
