@@ -1,10 +1,11 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkLowLevel;
-import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.spark.SparkBase;
+import com.revrobotics.spark.SparkClosedLoopController;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.hal.SimDouble;
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.RobotBase;
@@ -12,9 +13,9 @@ import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.simulation.ElevatorSim;
 import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.PIDSubsystem;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 
-public class Elevator extends PIDSubsystem {
+public class Elevator implements Subsystem {
   private static final double kP = 4;
   private static final double kI = 0.0;
   private static final double kD = 0.0;
@@ -29,23 +30,32 @@ public class Elevator extends PIDSubsystem {
 
   private static final double kArmEncoderDistPerPulse = 2.0 * 3.14 * kElevatorDrumRadius / 4096.0;
 
-  private final CANSparkMax m_motor;
+  private final SparkMax m_motor;
   private final RelativeEncoder m_encoder;
+
+  private final SparkClosedLoopController m_pidController;
 
   // Sim
   private SimDouble m_encoderPositionSim;
   private ElevatorSim m_elevatorSim;
 
+  private double m_goalHeight;
+
   /** Create a new elevator subsystem. */
   @SuppressWarnings("this-escape")
   public Elevator() {
-    super(new PIDController(kP, kI, kD));
-
-    m_motor = new CANSparkMax(PortMap.kElevatorMotorPort, CANSparkLowLevel.MotorType.kBrushless);
+    m_motor = new SparkMax(PortMap.kElevatorMotorPort, SparkMax.MotorType.kBrushless);
+    SparkMaxConfig motorConfig = new SparkMaxConfig();
+    motorConfig.encoder.positionConversionFactor(kArmEncoderDistPerPulse);
+    motorConfig.closedLoop.p(kP);
+    motorConfig.closedLoop.i(kI);
+    motorConfig.closedLoop.d(kD);
+    m_motor.configure(
+        motorConfig,
+        SparkBase.ResetMode.kResetSafeParameters,
+        SparkBase.PersistMode.kPersistParameters);
     m_encoder = m_motor.getEncoder();
-
-    m_encoder.setPositionConversionFactor(kArmEncoderDistPerPulse);
-    getController().setTolerance(0.005);
+    m_pidController = m_motor.getClosedLoopController();
 
     if (RobotBase.isSimulation()) {
       SimDeviceSim deviceSim = new SimDeviceSim("SPARK MAX [" + m_motor.getDeviceId() + "]");
@@ -67,14 +77,13 @@ public class Elevator extends PIDSubsystem {
     SmartDashboard.putNumber("Elevator Height", m_encoder.getPosition());
   }
 
-  @Override
-  public double getMeasurement() {
-    return m_encoder.getPosition();
+  public void goToHeight(double height) {
+    m_goalHeight = height;
+    m_pidController.setReference(height, SparkBase.ControlType.kPosition);
   }
 
-  @Override
-  public void useOutput(double output, double setpoint) {
-    m_motor.set(output);
+  public boolean isAtHeight() {
+    return Math.abs(m_goalHeight - m_encoder.getPosition()) < 0.05;
   }
 
   @Override

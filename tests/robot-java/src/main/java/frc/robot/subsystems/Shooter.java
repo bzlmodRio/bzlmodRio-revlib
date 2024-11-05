@@ -4,16 +4,17 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkLowLevel;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkPIDController;
-import edu.wpi.first.hal.SimDouble;
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.numbers.N1;
+import edu.wpi.first.math.system.LinearSystem;
 import edu.wpi.first.math.system.plant.DCMotor;
+import edu.wpi.first.math.system.plant.LinearSystemId;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.RobotController;
+import edu.wpi.first.wpilibj.motorcontrol.Victor;
+import edu.wpi.first.wpilibj.simulation.EncoderSim;
 import edu.wpi.first.wpilibj.simulation.FlywheelSim;
-import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -31,28 +32,26 @@ public class Shooter extends SubsystemBase {
   private static final double kGearing = 4;
   private static final double kInertia = 0.008;
 
-  private final CANSparkMax m_motor;
-  private final RelativeEncoder m_encoder;
-  private final SparkPIDController m_pidController;
+  private final Victor m_motor;
+  private final Encoder m_encoder;
+  private final PIDController m_pidController;
 
   // Sim
-  private SimDouble m_encoderVelocitySim;
+  private EncoderSim m_encoderSim;
   private FlywheelSim m_flywheelSim;
 
   /** Create a new claw subsystem. */
   public Shooter() {
-    m_motor = new CANSparkMax(PortMap.kShooterMotorPort, CANSparkLowLevel.MotorType.kBrushless);
-    m_encoder = m_motor.getEncoder();
-    m_pidController = m_motor.getPIDController();
-    m_pidController.setP(kP);
-    m_pidController.setI(kI);
-    m_pidController.setD(kD);
-    m_pidController.setFF(kF);
+    m_motor = new Victor(PortMap.kShooterMotorPort);
+    m_encoder = new Encoder(PortMap.kShooterEncoderPortA, PortMap.kShooterEncoderPortB);
+    m_pidController = new PIDController(kP, kI, kD);
 
     if (RobotBase.isSimulation()) {
-      SimDeviceSim deviceSim = new SimDeviceSim("SPARK MAX [" + m_motor.getDeviceId() + "]");
-      m_encoderVelocitySim = deviceSim.getDouble("Velocity");
-      m_flywheelSim = new FlywheelSim(kGearbox, kGearing, kInertia);
+      m_encoderSim = new EncoderSim(m_encoder);
+
+      LinearSystem<N1, N1, N1> plant =
+          LinearSystemId.createFlywheelSystem(kGearbox, kGearing, kInertia);
+      m_flywheelSim = new FlywheelSim(plant, kGearbox);
     }
   }
 
@@ -66,11 +65,13 @@ public class Shooter extends SubsystemBase {
   }
 
   public void spinAtRpm(double rpm) {
-    m_pidController.setReference(rpm, CANSparkMax.ControlType.kVelocity);
+    double pidVoltage = m_pidController.calculate(m_encoder.getRate(), rpm);
+    double voltage = pidVoltage + rpm * kF;
+    m_motor.setVoltage(voltage);
   }
 
   double getRpm() {
-    return m_encoder.getVelocity();
+    return m_encoder.getRate();
   }
 
   @Override
@@ -83,6 +84,6 @@ public class Shooter extends SubsystemBase {
     m_flywheelSim.setInput(m_motor.get() * RobotController.getInputVoltage());
 
     m_flywheelSim.update(0.02);
-    m_encoderVelocitySim.set(m_flywheelSim.getAngularVelocityRPM());
+    m_encoderSim.setRate(m_flywheelSim.getAngularVelocityRPM());
   }
 }

@@ -3,9 +3,9 @@
 #include <frc/simulation/FlywheelSim.h>
 #include <frc2/command/SubsystemBase.h>
 #include <hal/SimDevice.h>
-#include <rev/CANSparkMax.h>
-#include <rev/SparkMaxPIDController.h>
-#include <rev/SparkMaxRelativeEncoder.h>
+#include <rev/SparkClosedLoopController.h>
+#include <rev/SparkMax.h>
+#include <rev/SparkRelativeEncoder.h>
 
 class Shooter : public frc2::SubsystemBase {
 public:
@@ -23,9 +23,9 @@ public:
 private:
   void Log();
 
-  rev::CANSparkMax m_motor;
-  rev::SparkRelativeEncoder m_encoder;
-  rev::SparkPIDController m_controller;
+  rev::spark::SparkMax m_motor;
+  rev::spark::SparkRelativeEncoder m_encoder;
+  rev::spark::SparkClosedLoopController m_controller;
 
   // Sim
   hal::SimDouble m_encoderVelocitySim;

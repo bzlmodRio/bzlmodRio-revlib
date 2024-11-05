@@ -24,16 +24,12 @@ frc::DCMotor kElevatorGearbox = frc::DCMotor::Vex775Pro(4);
 } // namespace
 
 Elevator::Elevator()
-    : frc2::PIDSubsystem(frc::PIDController{kP, kI, kD}),
-      m_motor{kElevatorMotorPort, rev::CANSparkMax::MotorType::kBrushless},
+    : m_motor{kElevatorMotorPort, rev::spark::SparkMax::MotorType::kBrushless},
       m_encoder(m_motor.GetEncoder()),
+      m_controller(m_motor.GetClosedLoopController()),
       m_elevatorSim(kElevatorGearbox, kElevatorGearing, kCarriageMass,
                     kElevatorDrumRadius, kMinElevatorHeight, kMaxElevatorHeight,
-                    true, units::meter_t{0}) {
-  m_controller.SetTolerance(0.005);
-
-  SetName("Elevator");
-}
+                    true, units::meter_t{0}) {}
 
 void Elevator::Log() {
   frc::SmartDashboard::PutNumber("Elevator Height (m)",
@@ -44,10 +40,14 @@ units::meter_t Elevator::GetElevatorHeight() {
   return units::meter_t{m_encoder.GetPosition()};
 }
 
-double Elevator::GetMeasurement() { return GetElevatorHeight().to<double>(); }
+bool Elevator::IsAtHeight() {
+  return (GetElevatorHeight() - m_setpoint) < units::inch_t(2);
+}
 
-void Elevator::UseOutput(double output, double /* setpoint */) {
-  m_motor.SetVoltage(kGravityOffset + units::volt_t(output));
+void Elevator::GoToHeight(units::meter_t height) {
+  m_setpoint = height;
+  m_controller.SetReference(height.to<double>(),
+                            rev::spark::SparkLowLevel::ControlType::kPosition);
 }
 
 void Elevator::Periodic() { Log(); }
