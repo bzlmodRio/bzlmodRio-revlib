@@ -4,6 +4,7 @@
 #include <frc/controller/PIDController.h>
 #include <frc/livewindow/LiveWindow.h>
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <rev/config/SparkMaxConfig.h>
 
 #include "robot-cpp/subsystems/ports.hpp"
 
@@ -29,7 +30,17 @@ Elevator::Elevator()
       m_controller(m_motor.GetClosedLoopController()),
       m_elevatorSim(kElevatorGearbox, kElevatorGearing, kCarriageMass,
                     kElevatorDrumRadius, kMinElevatorHeight, kMaxElevatorHeight,
-                    true, units::meter_t{0}) {}
+                    true, units::meter_t{0}) {
+
+  rev::spark::SparkMaxConfig motorConfig;
+  motorConfig.closedLoop.P(kP);
+  motorConfig.closedLoop.I(kI);
+  motorConfig.closedLoop.D(kD);
+
+  m_motor.Configure(motorConfig,
+                    rev::spark::SparkBase::ResetMode::kNoResetSafeParameters,
+                    rev::spark::SparkBase::PersistMode::kPersistParameters);
+}
 
 void Elevator::Log() {
   frc::SmartDashboard::PutNumber("Elevator Height (m)",
