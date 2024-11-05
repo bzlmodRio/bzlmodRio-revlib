@@ -4,17 +4,20 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.math.controller.PIDController;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.spark.SparkBase;
+import com.revrobotics.spark.SparkClosedLoopController;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.SparkMaxConfig;
+import edu.wpi.first.hal.SimDouble;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.system.LinearSystem;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.system.plant.LinearSystemId;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.motorcontrol.Victor;
-import edu.wpi.first.wpilibj.simulation.EncoderSim;
 import edu.wpi.first.wpilibj.simulation.FlywheelSim;
+import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -32,22 +35,33 @@ public class Shooter extends SubsystemBase {
   private static final double kGearing = 4;
   private static final double kInertia = 0.008;
 
-  private final Victor m_motor;
-  private final Encoder m_encoder;
-  private final PIDController m_pidController;
+  private final SparkMax m_motor;
+  private final RelativeEncoder m_encoder;
+  private final SparkClosedLoopController m_pidController;
 
   // Sim
-  private EncoderSim m_encoderSim;
+  private SimDouble m_encoderVelocitySim;
   private FlywheelSim m_flywheelSim;
 
   /** Create a new claw subsystem. */
   public Shooter() {
-    m_motor = new Victor(PortMap.kShooterMotorPort);
-    m_encoder = new Encoder(PortMap.kShooterEncoderPortA, PortMap.kShooterEncoderPortB);
-    m_pidController = new PIDController(kP, kI, kD);
+    m_motor = new SparkMax(PortMap.kShooterMotorPort, SparkBase.MotorType.kBrushless);
+    SparkMaxConfig motorConfig = new SparkMaxConfig();
+    motorConfig.closedLoop.p(kP);
+    motorConfig.closedLoop.i(kI);
+    motorConfig.closedLoop.d(kD);
+    motorConfig.closedLoop.velocityFF(kF);
+    m_motor.configure(
+        motorConfig,
+        SparkBase.ResetMode.kResetSafeParameters,
+        SparkBase.PersistMode.kPersistParameters);
+
+    m_encoder = m_motor.getEncoder();
+    m_pidController = m_motor.getClosedLoopController();
 
     if (RobotBase.isSimulation()) {
-      m_encoderSim = new EncoderSim(m_encoder);
+      SimDeviceSim deviceSim = new SimDeviceSim("SPARK MAX [" + m_motor.getDeviceId() + "]");
+      m_encoderVelocitySim = deviceSim.getDouble("Velocity");
 
       LinearSystem<N1, N1, N1> plant =
           LinearSystemId.createFlywheelSystem(kGearbox, kGearing, kInertia);
@@ -65,13 +79,11 @@ public class Shooter extends SubsystemBase {
   }
 
   public void spinAtRpm(double rpm) {
-    double pidVoltage = m_pidController.calculate(m_encoder.getRate(), rpm);
-    double voltage = pidVoltage + rpm * kF;
-    m_motor.setVoltage(voltage);
+    m_pidController.setReference(rpm, SparkBase.ControlType.kVelocity);
   }
 
   double getRpm() {
-    return m_encoder.getRate();
+    return m_encoder.getVelocity();
   }
 
   @Override
@@ -84,6 +96,6 @@ public class Shooter extends SubsystemBase {
     m_flywheelSim.setInput(m_motor.get() * RobotController.getInputVoltage());
 
     m_flywheelSim.update(0.02);
-    m_encoderSim.setRate(m_flywheelSim.getAngularVelocityRPM());
+    m_encoderVelocitySim.set(m_flywheelSim.getAngularVelocityRPM());
   }
 }
