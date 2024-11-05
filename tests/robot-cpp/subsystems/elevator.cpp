@@ -12,7 +12,6 @@ namespace {
 constexpr double kP = 5.0;
 constexpr double kI = 0.0;
 constexpr double kD = 0.0;
-constexpr units::volt_t kGravityOffset{0.85};
 
 constexpr double kElevatorGearing = 10.0;
 constexpr units::meter_t kElevatorDrumRadius = 2_in;
@@ -31,7 +30,6 @@ Elevator::Elevator()
       m_elevatorSim(kElevatorGearbox, kElevatorGearing, kCarriageMass,
                     kElevatorDrumRadius, kMinElevatorHeight, kMaxElevatorHeight,
                     true, units::meter_t{0}) {
-
   rev::spark::SparkMaxConfig motorConfig;
   motorConfig.closedLoop.P(kP);
   motorConfig.closedLoop.I(kI);
