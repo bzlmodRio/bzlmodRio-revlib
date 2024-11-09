@@ -47,15 +47,17 @@ DriveTrain::DriveTrain()
 
   rev::spark::SparkMaxConfig leftFollowerConfig;
   leftFollowerConfig.Follow(m_leftMotorA);
-  m_leftMotorB.Configure(leftFollowerConfig,
-                    rev::spark::SparkBase::ResetMode::kNoResetSafeParameters,
-                    rev::spark::SparkBase::PersistMode::kPersistParameters);
-                    
+  m_leftMotorB.Configure(
+      leftFollowerConfig,
+      rev::spark::SparkBase::ResetMode::kNoResetSafeParameters,
+      rev::spark::SparkBase::PersistMode::kPersistParameters);
+
   rev::spark::SparkMaxConfig rightFollowerConfig;
   rightFollowerConfig.Follow(m_rightMotorA);
-  m_rightMotorB.Configure(rightFollowerConfig,
-                    rev::spark::SparkBase::ResetMode::kNoResetSafeParameters,
-                    rev::spark::SparkBase::PersistMode::kPersistParameters);
+  m_rightMotorB.Configure(
+      rightFollowerConfig,
+      rev::spark::SparkBase::ResetMode::kNoResetSafeParameters,
+      rev::spark::SparkBase::PersistMode::kPersistParameters);
 
   SetName("DriveTrain");
 }
