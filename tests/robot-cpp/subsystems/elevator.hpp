@@ -8,7 +8,7 @@
 #include <units/length.h>
 
 class Elevator : public frc2::Subsystem {
-public:
+ public:
   Elevator();
 
   void Stop();
@@ -23,7 +23,7 @@ public:
 
   units::meter_t GetElevatorHeight();
 
-private:
+ private:
   void Log();
 
   rev::spark::SparkMax m_motor;
