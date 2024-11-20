@@ -13,7 +13,7 @@ constexpr units::kilogram_square_meter_t kInertia{0.008};
 
 frc::LinearSystem<1, 1, 1> kPlant{
     frc::LinearSystemId::FlywheelSystem(kGearbox, kInertia, kGearing)};
-} // namespace
+}  // namespace
 
 Shooter::Shooter()
     : m_motor{kShooterMotorPort, rev::spark::SparkMax::MotorType::kBrushless},
