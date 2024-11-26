@@ -8,7 +8,7 @@
 #include <rev/SparkRelativeEncoder.h>
 
 class Shooter : public frc2::SubsystemBase {
-public:
+ public:
   Shooter();
 
   void Periodic() override;
@@ -20,7 +20,7 @@ public:
 
   units::revolutions_per_minute_t GetRpm();
 
-private:
+ private:
   void Log();
 
   rev::spark::SparkMax m_motor;

@@ -1,17 +1,15 @@
 import os
 
+from bazelrio_gentool.deps.dependency_container import ModuleDependency
 from bazelrio_gentool.load_vendordep_dependency import vendordep_dependency
 from get_allwpilib_dependencies import get_allwpilib_dependencies
-from bazelrio_gentool.deps.dependency_container import (
-    ModuleDependency,
-)
 
 
 def get_revlib_dependencies(
     use_local_allwpilib=False,
     use_local_opencv=False,
     use_local_ni=False,
-    allwpilib_version_override="2025.1.1-beta-1",
+    allwpilib_version_override="2025.1.1-beta-2",
     opencv_version_override="2024.4.8.0-4.bcr1",
 ):
     SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
