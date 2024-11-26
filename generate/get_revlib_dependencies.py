@@ -9,7 +9,7 @@ def get_revlib_dependencies(
     use_local_allwpilib=False,
     use_local_opencv=False,
     use_local_ni=False,
-    allwpilib_version_override="2025.1.1-beta-1",
+    allwpilib_version_override="2025.1.1-beta-2",
     opencv_version_override="2024.4.8.0-4.bcr1",
 ):
     SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
