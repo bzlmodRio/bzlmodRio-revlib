@@ -37,8 +37,8 @@ def main():
         group,
         mandatory_dependencies=mandatory_dependencies,
         include_windows_arm_compiler=False,
-        include_linuxarm32_compiler=False,
-        include_linuxarm64_compiler=False,
+        include_linuxarm32_compiler=True,
+        include_linuxarm64_compiler=True,
     )
     generate_meta_deps(output_dir, group, force_tests=args.force_tests)
 
