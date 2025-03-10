@@ -4999,8 +4999,8 @@
     },
     "@@bzlmodrio-revlib~//:maven_cpp_deps.bzl%setup_bzlmodrio_revlib_cpp_dependencies": {
       "general": {
-        "bzlTransitiveDigest": "J+CAOPLG3uRWfDGuxJX1x050JHpPmm7NV3yBhLXM9do=",
-        "usagesDigest": "zrCESFcjc1BRqtGONfZj7aD5GM8QIti6Tx63QGup2p8=",
+        "bzlTransitiveDigest": "oc2o1kA0LAxkFw4beXnwLRap6DMoIwQp+HYLihrV9Ps=",
+        "usagesDigest": "rykctYqh5Rvmlj8giIIbmGkX8fc7wX/vov9jdS592EE=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {},
@@ -5009,8 +5009,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.2/REVLib-cpp-2025.0.2-linuxathena.zip",
-              "sha256": "4d5504e40722d2c75f57145de731a03d4e62fcdb6853c514ff72e9bf23887b8d",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.3/REVLib-cpp-2025.0.3-linuxathena.zip",
+              "sha256": "bc0545a046a8888a71e74954f288a65c961b3d169fcefc8f0601e08a48870724",
               "build_file": "@@bzlmodrio-revlib~//private/cpp/REVLib-cpp:shared.BUILD.bazel"
             }
           },
@@ -5018,8 +5018,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.2/REVLib-driver-2025.0.2-osxuniversal.zip",
-              "sha256": "d15b612a1b434f4d092e50d27bac1bcc81704cbf5f5198b502a4a9878fda110d",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.3/REVLib-driver-2025.0.3-osxuniversal.zip",
+              "sha256": "ca107458b929769e496b8bbdb07152123b157ea4f9f903a20b6d1b01966dc2b2",
               "build_file": "@@bzlmodrio-revlib~//private/cpp/REVLib-driver:shared.BUILD.bazel",
               "patch_cmds": [
                 "install_name_tool -id @rpath/libREVLibDriver.dylib osx/universal/shared/libREVLibDriver.dylib",
@@ -5033,8 +5033,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.2/REVLib-driver-2025.0.2-osxuniversalstatic.zip",
-              "sha256": "166a97f9cb6e641837daf8fdc303a96dd5517c9397fda008b7e04070dda34b9f",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.3/REVLib-driver-2025.0.3-osxuniversalstatic.zip",
+              "sha256": "1bfb0439636838a657627c158a8682c66108b514f062f724306e695a9670c56d",
               "build_file": "@@bzlmodrio-revlib~//private/cpp/REVLib-driver:static.BUILD.bazel"
             }
           },
@@ -5042,8 +5042,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.2/REVLib-driver-2025.0.2-linuxarm64.zip",
-              "sha256": "cfa881275b873035681edb1ed798d58746421482e80b39561f8887422c30b5ad",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.3/REVLib-driver-2025.0.3-linuxarm64.zip",
+              "sha256": "0940456e7d7c58821a1532c460da81d7850d9c0fcb43ddb099f48b3ec4b75ab8",
               "build_file": "@@bzlmodrio-revlib~//private/cpp/REVLib-driver:shared.BUILD.bazel"
             }
           },
@@ -5051,8 +5051,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.2/REVLib-cpp-2025.0.2-osxuniversal.zip",
-              "sha256": "453a0704aed711abb01c1a953219e0bce9ad402c271b1cab5803baf2466572d4",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.3/REVLib-cpp-2025.0.3-osxuniversal.zip",
+              "sha256": "a4aa13e80b7d8b27031aef886e1f30fc1c8bcb70dc98d7d5af90136aa02d46dc",
               "build_file": "@@bzlmodrio-revlib~//private/cpp/REVLib-cpp:shared.BUILD.bazel",
               "patch_cmds": [
                 "install_name_tool -id @rpath/libREVLib.dylib osx/universal/shared/libREVLib.dylib",
@@ -5072,8 +5072,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.2/REVLib-cpp-2025.0.2-linuxarm64.zip",
-              "sha256": "b5050b2242142de5ece4a2151340c4740c65a80a65f904b946844e4e87fa40bf",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.3/REVLib-cpp-2025.0.3-linuxarm64.zip",
+              "sha256": "b1b205e251962787094c3a7e8653d2d4d72e5e75cff639c88c21497fe00bb75a",
               "build_file": "@@bzlmodrio-revlib~//private/cpp/REVLib-cpp:shared.BUILD.bazel"
             }
           },
@@ -5081,8 +5081,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.2/REVLib-driver-2025.0.2-linuxx86-64static.zip",
-              "sha256": "05a6705bd16b74dbe75e0926c3928dbe8f2e69c7aa03fde359034651b1210716",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.3/REVLib-driver-2025.0.3-linuxx86-64static.zip",
+              "sha256": "35689c73cadefc74ade56077e87c3772549be4d2407243c27ea89c879585e57b",
               "build_file": "@@bzlmodrio-revlib~//private/cpp/REVLib-driver:static.BUILD.bazel"
             }
           },
@@ -5090,8 +5090,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.2/REVLib-driver-2025.0.2-linuxathenastatic.zip",
-              "sha256": "6664eb17a7052d1d3bd839a35ef6c498fe0e7187af0b384250e4d08098ce2ca8",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.3/REVLib-driver-2025.0.3-linuxathenastatic.zip",
+              "sha256": "7720de7cda4b0f90a6da262c8f09d040a87de9904fa9076ec7ef56a291a3bed2",
               "build_file": "@@bzlmodrio-revlib~//private/cpp/REVLib-driver:static.BUILD.bazel"
             }
           },
@@ -5099,8 +5099,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.2/REVLib-cpp-2025.0.2-linuxarm64static.zip",
-              "sha256": "f75949b18d20a47f4353715a281d919ff6997f46d3850f03bca8647769eed660",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.3/REVLib-cpp-2025.0.3-linuxarm64static.zip",
+              "sha256": "44d168d60dc52636739b2c19b6eeece5cc502f20ab4c1bf96bddcbded69ec129",
               "build_file": "@@bzlmodrio-revlib~//private/cpp/REVLib-cpp:static.BUILD.bazel"
             }
           },
@@ -5108,8 +5108,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.2/REVLib-driver-2025.0.2-linuxarm64static.zip",
-              "sha256": "55581074465a2a9c650322b547a7063110ab5470875d3eba6ce91065f3ad9d97",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.3/REVLib-driver-2025.0.3-linuxarm64static.zip",
+              "sha256": "ee5d43e8cf00f752257a7ad02daf1e4dda2f4d5b2c6d3e94770f9ec7e9b7696d",
               "build_file": "@@bzlmodrio-revlib~//private/cpp/REVLib-driver:static.BUILD.bazel"
             }
           },
@@ -5117,8 +5117,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.2/REVLib-cpp-2025.0.2-linuxathenastatic.zip",
-              "sha256": "07493743f70bcf38610a9fef78235a492451356a51420bdbab72de0eeac21626",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.3/REVLib-cpp-2025.0.3-linuxathenastatic.zip",
+              "sha256": "5cedafc536d8c1c7c45bac2e24e728fe5d479fc43efda3c90ee5ffd72bc31189",
               "build_file": "@@bzlmodrio-revlib~//private/cpp/REVLib-cpp:static.BUILD.bazel"
             }
           },
@@ -5126,8 +5126,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.2/REVLib-cpp-2025.0.2-linuxarm32static.zip",
-              "sha256": "7df87fd948ad55766976b44fc4995f0c9c3380123b2468f2a8cdb70a2593a44a",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.3/REVLib-cpp-2025.0.3-linuxarm32static.zip",
+              "sha256": "32f38099c97f8f0deaef5460e4c81e96f75b3c152a02dba958ded7de3348620f",
               "build_file": "@@bzlmodrio-revlib~//private/cpp/REVLib-cpp:static.BUILD.bazel"
             }
           },
@@ -5135,8 +5135,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.2/REVLib-driver-2025.0.2-linuxx86-64.zip",
-              "sha256": "3e9e50723da4a8c0e5602e7445cbb98a7bd9bfabb5f42d68b02fb6640a541a25",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.3/REVLib-driver-2025.0.3-linuxx86-64.zip",
+              "sha256": "9b02a9a5ad5c6179ea913b4d914bdc561e82b3011903991e685ee4258889b14e",
               "build_file": "@@bzlmodrio-revlib~//private/cpp/REVLib-driver:shared.BUILD.bazel"
             }
           },
@@ -5144,8 +5144,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.2/REVLib-driver-2025.0.2-windowsx86-64static.zip",
-              "sha256": "805eb6477753de4c4051b8028a92845578e1790a82dc2a3bb1eade01a51ad293",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.3/REVLib-driver-2025.0.3-windowsx86-64static.zip",
+              "sha256": "f4909658d325cc70df1a9a3343494a77c5ba02587e572cdc80657436d16c479e",
               "build_file": "@@bzlmodrio-revlib~//private/cpp/REVLib-driver:static.BUILD.bazel"
             }
           },
@@ -5153,8 +5153,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.2/REVLib-driver-2025.0.2-linuxarm32.zip",
-              "sha256": "f5cf462060c0b1035426f907846bd05641c93e1d737de4c19eb9cdf9df109bdd",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.3/REVLib-driver-2025.0.3-linuxarm32.zip",
+              "sha256": "71861f0179431fc2ec9bf7ad9f1967073d89b67eb9ae3276b4f6baf804725f77",
               "build_file": "@@bzlmodrio-revlib~//private/cpp/REVLib-driver:shared.BUILD.bazel"
             }
           },
@@ -5162,8 +5162,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.2/REVLib-driver-2025.0.2-linuxarm32static.zip",
-              "sha256": "1845f3926821b78de001674958c8c6c750a16362906af835836a3fb6c2332acf",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.3/REVLib-driver-2025.0.3-linuxarm32static.zip",
+              "sha256": "ebf50e9fd894b399f4ef7ec25079fc761828b8e39ce050b5e827ae33f62e8917",
               "build_file": "@@bzlmodrio-revlib~//private/cpp/REVLib-driver:static.BUILD.bazel"
             }
           },
@@ -5171,8 +5171,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.2/REVLib-cpp-2025.0.2-osxuniversalstatic.zip",
-              "sha256": "308a5797f3dfc8762425c005867f823bb828d10450d67942986685d59d1c21d4",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.3/REVLib-cpp-2025.0.3-osxuniversalstatic.zip",
+              "sha256": "9423bb0ba05b9ece47f0df8cf4cf78907d3330b112e350bd6e4e98795e35c79e",
               "build_file": "@@bzlmodrio-revlib~//private/cpp/REVLib-cpp:static.BUILD.bazel"
             }
           },
@@ -5180,8 +5180,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.2/REVLib-driver-2025.0.2-linuxathena.zip",
-              "sha256": "896962ea9d4858a785a00c78db888887fa0a4928f2d8628a65ca4c683d483fef",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.3/REVLib-driver-2025.0.3-linuxathena.zip",
+              "sha256": "c9701c8b0163a43feb8229a30bb3ab95addb6973d019caa2836776ff3c30b96b",
               "build_file": "@@bzlmodrio-revlib~//private/cpp/REVLib-driver:shared.BUILD.bazel"
             }
           },
@@ -5189,8 +5189,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.2/REVLib-cpp-2025.0.2-headers.zip",
-              "sha256": "071e1d7c6112537a1e2c2528edea51a9b60ce16ded65c3cb2c4f2a36e86e0585",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.3/REVLib-cpp-2025.0.3-headers.zip",
+              "sha256": "b453714e35c37a3fe5b9eb154c2af00ce5d35dbe1f63cde87e6dde327bd656ce",
               "build_file_content": "cc_library(\n    name = \"headers\",\n    hdrs = glob([\"**\"]),\n    includes = [\".\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"header_files\",\n    srcs = glob([\"**\"]),\n    visibility = [\"//visibility:public\"],\n)\n"
             }
           },
@@ -5198,8 +5198,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.2/REVLib-cpp-2025.0.2-linuxarm32.zip",
-              "sha256": "9a5d507b82704c409a849c6628a89229877ca7af248689291dc674de1e8c6ad8",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.3/REVLib-cpp-2025.0.3-linuxarm32.zip",
+              "sha256": "24cc85273ab80babc97ce79b08b9f184b92bc0eee3fd4fb4b10227e436d5aa60",
               "build_file": "@@bzlmodrio-revlib~//private/cpp/REVLib-cpp:shared.BUILD.bazel"
             }
           },
@@ -5207,8 +5207,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.2/REVLib-driver-2025.0.2-windowsx86-64.zip",
-              "sha256": "35b4eb442ccf7a58de4d8ac813c88c8a08da09cb900c2458da4cb4e5f83aebf2",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.3/REVLib-driver-2025.0.3-windowsx86-64.zip",
+              "sha256": "79bb847d1735aefcc52d750156020a86a93528d34dee8a024758c9db32cd7db1",
               "build_file": "@@bzlmodrio-revlib~//private/cpp/REVLib-driver:shared.BUILD.bazel"
             }
           },
@@ -5216,8 +5216,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.2/REVLib-cpp-2025.0.2-windowsx86-64.zip",
-              "sha256": "501b49b5a6fff1d0533bd2f7850b9bd90460f589d6d41e89423c20bb0f9a5ba5",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.3/REVLib-cpp-2025.0.3-windowsx86-64.zip",
+              "sha256": "8c87d8a94c77c162facc4353ab74f8bb9a0a0f90fb217aebfbaf7823cffaff02",
               "build_file": "@@bzlmodrio-revlib~//private/cpp/REVLib-cpp:shared.BUILD.bazel"
             }
           },
@@ -5225,8 +5225,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.2/REVLib-cpp-2025.0.2-windowsx86-64static.zip",
-              "sha256": "414d0dd7d48523c241b4504e51cc9dab55e2047ce4c2e2e015050ff0a2d59a96",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.3/REVLib-cpp-2025.0.3-windowsx86-64static.zip",
+              "sha256": "11078cbb3cd9a7137c2fca6298c7a26925cb3162dcd48e94a5fcf303e316b64e",
               "build_file": "@@bzlmodrio-revlib~//private/cpp/REVLib-cpp:static.BUILD.bazel"
             }
           },
@@ -5234,8 +5234,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.2/REVLib-cpp-2025.0.2-linuxx86-64.zip",
-              "sha256": "7f4884817ec286adf3f4451b73cc2d7ec5c9fe8fdf55e4794785cb5e89ba254c",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.3/REVLib-cpp-2025.0.3-linuxx86-64.zip",
+              "sha256": "b3d52febf25eccc98bb2d615c291ca3fb3b38db0b21b25d1398adccee2a8d3f4",
               "build_file": "@@bzlmodrio-revlib~//private/cpp/REVLib-cpp:shared.BUILD.bazel"
             }
           },
@@ -5243,8 +5243,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.2/REVLib-cpp-2025.0.2-linuxx86-64static.zip",
-              "sha256": "ebce3d3bf0acd086ab19a077da2548343a6a0438490ee99a6cbe3d51c1d9f5f9",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-cpp/2025.0.3/REVLib-cpp-2025.0.3-linuxx86-64static.zip",
+              "sha256": "b30dbd7c8e77acd7731b96952b1342385ce1ef9e8c9dd727a213bff4c6deb4d6",
               "build_file": "@@bzlmodrio-revlib~//private/cpp/REVLib-cpp:static.BUILD.bazel"
             }
           },
@@ -5252,8 +5252,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.2/REVLib-driver-2025.0.2-headers.zip",
-              "sha256": "7656ef3b77a538daf9a9c53f47bffa4b8a802df71eabecb021292df837896eea",
+              "url": "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-driver/2025.0.3/REVLib-driver-2025.0.3-headers.zip",
+              "sha256": "549c4dac1bc2a0c72f3d4ed98accea03ed12b77d12d31ed4dc8ef378a2bb527c",
               "build_file_content": "cc_library(\n    name = \"headers\",\n    hdrs = glob([\"**\"]),\n    includes = [\".\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"header_files\",\n    srcs = glob([\"**\"]),\n    visibility = [\"//visibility:public\"],\n)\n"
             }
           }
@@ -5269,8 +5269,8 @@
     },
     "@@bzlmodrio-revlib~//:maven_java_deps.bzl%setup_bzlmodrio_revlib_java_dependencies": {
       "general": {
-        "bzlTransitiveDigest": "h9LylEOpwMH/8f+ha/9X1B+cztqk3sBo5dyw6vN+W74=",
-        "usagesDigest": "PUT9k09s91/6isDEl+xku6GBf2mBNlDxZ5rb9SXO6To=",
+        "bzlTransitiveDigest": "5zTfrLkQNNQoaCEaIkMoLXIYm8uBCE67ZYtEY1TqT8A=",
+        "usagesDigest": "QS2MBzHi2sFiM+VFBTLB7DYlBu1ZMWHhncMkxKIasP4=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {},
@@ -5281,15 +5281,15 @@
             "attributes": {
               "generated_rule_name": "com_revrobotics_frc_revlib_java",
               "artifact_urls": [
-                "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-java/2025.0.2/REVLib-java-2025.0.2.jar"
+                "https://maven.revrobotics.com/com/revrobotics/frc/REVLib-java/2025.0.3/REVLib-java-2025.0.3.jar"
               ],
               "srcjar_urls": [],
-              "canonical_id": "com.revrobotics.frc:REVLib-java:2025.0.2",
+              "canonical_id": "com.revrobotics.frc:REVLib-java:2025.0.3",
               "rule_name": "java_import",
               "tags": [
-                "maven_coordinates=com.revrobotics.frc:REVLib-java:2025.0.2"
+                "maven_coordinates=com.revrobotics.frc:REVLib-java:2025.0.3"
               ],
-              "artifact_sha256": "9452e7caae7d05a8bd6ae491a922431e5b978a3bc2ebdc2b5292dfb28990386f"
+              "artifact_sha256": "e711e249ab771cb4dbfed4e6e295a6b1ff782f5cee4f9751a2c2d46af4ad46d2"
             }
           }
         },
