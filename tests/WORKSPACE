@@ -180,21 +180,35 @@ maven_install(
 #####################
 http_archive(
     name = "rules_wpi_styleguide",
-    sha256 = "b8215443ef1a6cc8170bc76203e44f22516614c58935e22c6a94b63656e2c88a",
-    url = "https://github.com/bzlmodRio/rules_wpi_styleguide/releases/download/2024.11.19/rules_wpi_styleguide-2024.11.19.tar.gz",
+    sha256 = "6f8b428bf07319c26ea1187d868fc2538c29fafccad7717e0043411b0cd6466f",
+    url = "https://github.com/bzlmodRio/rules_wpi_styleguide/releases/download/2025.06.22/rules_wpi_styleguide-2025.06.22.tar.gz",
 )
 
+load("@rules_checkstyle//dependencies:load_dependencies.bzl", "load_checkstyle_dependencies")
+load("@rules_pmd//dependencies:load_dependencies.bzl", "load_pmd_dependencies")
+load("@rules_spotless//dependencies:load_dependencies.bzl", "load_spotless_dependencies")
 load("@rules_wpiformat//dependencies:load_dependencies.bzl", "load_wpiformat_dependencies")
+
+load_checkstyle_dependencies()
+
+load_pmd_dependencies()
 
 load_wpiformat_dependencies()
 
-load("@rules_wpi_styleguide//dependencies:setup_styleguide.bzl", "setup_styleguide")
+load_spotless_dependencies()
 
-setup_styleguide()
+load("@rules_checkstyle_dependencies//:defs.bzl", checkstyle_pinned_maven_install = "pinned_maven_install")
+load("@rules_pmd_dependencies//:defs.bzl", pmd_pinned_maven_install = "pinned_maven_install")
+load("@rules_spotless_dependencies//:defs.bzl", spotless_pinned_maven_install = "pinned_maven_install")
+load("@rules_wpiformat_pip//:requirements.bzl", "install_deps")
 
-load("@rules_wpi_styleguide//dependencies:load_pins.bzl", "load_styleguide_pins")
+install_deps()
 
-load_styleguide_pins()
+pmd_pinned_maven_install()
+
+checkstyle_pinned_maven_install()
+
+spotless_pinned_maven_install()
 #####################
 
 http_archive(
