@@ -44,7 +44,7 @@ public class Elevator implements Subsystem {
   /** Create a new elevator subsystem. */
   @SuppressWarnings("this-escape")
   public Elevator() {
-    m_motor = new SparkMax(PortMap.kElevatorMotorPort, SparkMax.MotorType.kBrushless);
+    m_motor = new SparkMax(0, PortMap.kElevatorMotorPort, SparkMax.MotorType.kBrushless);
     SparkMaxConfig motorConfig = new SparkMaxConfig();
     motorConfig.encoder.positionConversionFactor(kArmEncoderDistPerPulse);
     motorConfig.closedLoop.p(kP);
@@ -95,7 +95,7 @@ public class Elevator implements Subsystem {
   public void simulationPeriodic() {
     m_elevatorSim.setInput(m_motor.get() * RobotController.getInputVoltage());
     m_elevatorSim.update(0.02);
-    m_encoderPositionSim.set(m_elevatorSim.getPositionMeters());
+    m_encoderPositionSim.set(m_elevatorSim.getPosition());
   }
 
   public void stop() {

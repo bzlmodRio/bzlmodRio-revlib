@@ -2,7 +2,6 @@
 
 #include <frc/RobotController.h>
 #include <frc/controller/PIDController.h>
-#include <frc/livewindow/LiveWindow.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <rev/config/SparkMaxConfig.h>
 
@@ -24,7 +23,8 @@ frc::DCMotor kElevatorGearbox = frc::DCMotor::Vex775Pro(4);
 }  // namespace
 
 Elevator::Elevator()
-    : m_motor{kElevatorMotorPort, rev::spark::SparkMax::MotorType::kBrushless},
+    : m_motor{0, kElevatorMotorPort,
+              rev::spark::SparkMax::MotorType::kBrushless},
       m_encoder(m_motor.GetEncoder()),
       m_controller(m_motor.GetClosedLoopController()),
       m_elevatorSim(kElevatorGearbox, kElevatorGearing, kCarriageMass,

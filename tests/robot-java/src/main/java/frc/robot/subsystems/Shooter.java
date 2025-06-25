@@ -45,7 +45,7 @@ public class Shooter extends SubsystemBase {
 
   /** Create a new claw subsystem. */
   public Shooter() {
-    m_motor = new SparkMax(PortMap.kShooterMotorPort, SparkBase.MotorType.kBrushless);
+    m_motor = new SparkMax(0, PortMap.kShooterMotorPort, SparkBase.MotorType.kBrushless);
     SparkMaxConfig motorConfig = new SparkMaxConfig();
     motorConfig.closedLoop.p(kP);
     motorConfig.closedLoop.i(kI);
@@ -96,6 +96,6 @@ public class Shooter extends SubsystemBase {
     m_flywheelSim.setInput(m_motor.get() * RobotController.getInputVoltage());
 
     m_flywheelSim.update(0.02);
-    m_encoderVelocitySim.set(m_flywheelSim.getAngularVelocityRPM());
+    m_encoderVelocitySim.set(m_flywheelSim.getAngularVelocity());
   }
 }
