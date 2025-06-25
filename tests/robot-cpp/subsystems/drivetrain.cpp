@@ -13,19 +13,19 @@
 #include "robot-cpp/subsystems/ports.hpp"
 
 DriveTrain::DriveTrain()
-    : m_leftMotorA{kDrivetrainMotorLeftAPort,
+    : m_leftMotorA{0, kDrivetrainMotorLeftAPort,
                    rev::spark::SparkMax::MotorType::kBrushless},
-      m_leftMotorB{kDrivetrainMotorLeftBPort,
+      m_leftMotorB{0, kDrivetrainMotorLeftBPort,
                    rev::spark::SparkMax::MotorType::kBrushless},
       m_leftEncoder{m_leftMotorA.GetEncoder()},
-      m_rightMotorA{kDrivetrainMotorRightAPort,
+      m_rightMotorA{0, kDrivetrainMotorRightAPort,
                     rev::spark::SparkMax::MotorType::kBrushless},
-      m_rightMotorB{kDrivetrainMotorRightBPort,
+      m_rightMotorB{0, kDrivetrainMotorRightBPort,
                     rev::spark::SparkMax::MotorType::kBrushless},
       m_rightEncoder{m_rightMotorA.GetEncoder()},
       m_robotDrive{m_leftMotorA, m_rightMotorA},
       m_odometry{frc::Rotation2d(), 0_m, 0_m},
-      m_gyroSim{m_gyro},
+      // m_gyroSim{m_gyro},
       m_drivetrainSimulator(
           frc::sim::DifferentialDrivetrainSim::CreateKitbotSim(
               frc::sim::DifferentialDrivetrainSim::KitbotMotor::DualCIMPerSide,
@@ -83,10 +83,10 @@ double DriveTrain::GetHeadingDegrees() {
   return GetRotation().Degrees().to<double>();
 }
 
-frc::Rotation2d DriveTrain::GetRotation() { return m_gyro.GetRotation2d(); }
+frc::Rotation2d DriveTrain::GetRotation() { return frc::Rotation2d{}; } // return m_gyro.GetRotation2d(); }
 
 void DriveTrain::Reset() {
-  m_gyro.Reset();
+  // m_gyro.Reset();
   m_leftEncoder.SetPosition(0);
   m_rightEncoder.SetPosition(0);
 }
@@ -126,7 +126,7 @@ void DriveTrain::SimulationPeriodic() {
       m_drivetrainSimulator.GetRightPosition().to<double>());
   m_rightEncoderVelocitySim.Set(
       m_drivetrainSimulator.GetRightVelocity().to<double>());
-  m_gyroSim.SetAngle(-m_drivetrainSimulator.GetHeading().Degrees());
+  // m_gyroSim.SetAngle(-m_drivetrainSimulator.GetHeading().Degrees());
 }
 
 units::meter_t DriveTrain::GetLeftEncoderDistance() {

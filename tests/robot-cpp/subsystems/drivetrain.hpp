@@ -1,9 +1,9 @@
 #pragma once
 
-#include <frc/ADXRS450_Gyro.h>
+// #include <frc/ADXRS450_Gyro.h>
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/kinematics/DifferentialDriveOdometry.h>
-#include <frc/simulation/ADXRS450_GyroSim.h>
+// #include <frc/simulation/ADXRS450_GyroSim.h>
 #include <frc/simulation/DifferentialDrivetrainSim.h>
 #include <frc/smartdashboard/Field2d.h>
 #include <frc2/command/SubsystemBase.h>
@@ -49,14 +49,14 @@ class DriveTrain : public frc2::SubsystemBase {
   rev::spark::SparkMax m_rightMotorB;
   rev::spark::SparkRelativeEncoder m_rightEncoder;
 
-  frc::ADXRS450_Gyro m_gyro;
+  // frc::ADXRS450_Gyro m_gyro;
   frc::DifferentialDrive m_robotDrive;
 
   frc::DifferentialDriveOdometry m_odometry;
   frc::Field2d m_field;
 
   // Simulation
-  frc::sim::ADXRS450_GyroSim m_gyroSim;
+  // frc::sim::ADXRS450_GyroSim m_gyroSim;
   hal::SimDouble m_leftEncoderPositionSim;
   hal::SimDouble m_leftEncoderVelocitySim;
   hal::SimDouble m_rightEncoderPositionSim;

@@ -17,7 +17,7 @@ frc::LinearSystem<1, 1, 1> kPlant{
 }  // namespace
 
 Shooter::Shooter()
-    : m_motor{kShooterMotorPort, rev::spark::SparkMax::MotorType::kBrushless},
+    : m_motor{0, kShooterMotorPort, rev::spark::SparkMax::MotorType::kBrushless},
       m_encoder(m_motor.GetEncoder()),
       m_controller(m_motor.GetClosedLoopController()),
       m_flywheelSim(kPlant, kGearbox) {}
