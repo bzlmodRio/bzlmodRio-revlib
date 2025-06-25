@@ -8,7 +8,8 @@
 int main() {
   std::cout << "Hello World" << std::endl;
 
-  rev::spark::SparkMax sparkMax{0, 3, rev::spark::SparkMax::MotorType::kBrushless};
+  rev::spark::SparkMax sparkMax{0, 3,
+                                rev::spark::SparkMax::MotorType::kBrushless};
 
   std::cout << "Running  some loops" << std::endl;
   for (int i = 0; i < 500; ++i) {

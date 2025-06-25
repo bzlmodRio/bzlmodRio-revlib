@@ -83,7 +83,9 @@ double DriveTrain::GetHeadingDegrees() {
   return GetRotation().Degrees().to<double>();
 }
 
-frc::Rotation2d DriveTrain::GetRotation() { return frc::Rotation2d{}; } // return m_gyro.GetRotation2d(); }
+frc::Rotation2d DriveTrain::GetRotation() {
+  return frc::Rotation2d{};
+}  // return m_gyro.GetRotation2d(); }
 
 void DriveTrain::Reset() {
   // m_gyro.Reset();
