@@ -110,6 +110,7 @@ def __setup_bzlmodrio_revlib_cpp_dependencies(mctx):
             "install_name_tool -id @rpath/libREVLib.dylib osx/universal/shared/libREVLib.dylib",
             "install_name_tool -change libBackendDriver.dylib @rpath/libBackendDriver.dylib osx/universal/shared/libREVLib.dylib",
             "install_name_tool -change libREVLibDriver.dylib @rpath/libREVLibDriver.dylib osx/universal/shared/libREVLib.dylib",
+            "install_name_tool -change libREVLibWpi.dylib @rpath/libREVLibWpi.dylib osx/universal/shared/libREVLib.dylib",
             "install_name_tool -change libntcore.dylib @rpath/libntcore.dylib osx/universal/shared/libREVLib.dylib",
             "install_name_tool -change libwpiHal.dylib @rpath/libwpiHal.dylib osx/universal/shared/libREVLib.dylib",
             "install_name_tool -change libwpilibc.dylib @rpath/libwpilibc.dylib osx/universal/shared/libREVLib.dylib",
