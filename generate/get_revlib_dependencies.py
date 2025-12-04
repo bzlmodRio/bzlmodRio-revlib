@@ -9,7 +9,7 @@ def get_revlib_dependencies(
     use_local_allwpilib=False,
     use_local_opencv=False,
     use_local_ni=False,
-    allwpilib_version_override="2025.3.2.bcr1",
+    allwpilib_version_override="2026.1.1-beta-1",
     opencv_version_override="2025.4.10.0-3.bcr3",
 ):
     SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -47,6 +47,14 @@ def get_revlib_dependencies(
                     allwpilib_dependency.container.get_cc_dependency("hal-cpp"),
                 ],
             ),
+            "RevLibBackendDriver": dict(
+                artifact_install_name="BackendDriver",
+                deps=[],
+            ),
+            "RevLibWpiBackendDriver": dict(
+                artifact_install_name="REVLibWpi",
+                deps=[],
+            ),
         },
     )
 
@@ -54,11 +62,19 @@ def get_revlib_dependencies(
 
     group.add_cc_meta_dependency(
         "revlib-cpp",
-        deps=["REVLib-cpp", "REVLib-driver", "wpilibc-cpp"],
+        deps=[
+            "REVLib-cpp",
+            "REVLib-driver",
+            "RevLibBackendDriver",
+            "RevLibWpiBackendDriver",
+            "wpilibc-cpp",
+        ],
         platform_deps={},
         jni_deps={
             "//conditions:default": [
                 "REVLib-driver",
+                "RevLibBackendDriver",
+                "RevLibWpiBackendDriver",
             ]
         },
     )

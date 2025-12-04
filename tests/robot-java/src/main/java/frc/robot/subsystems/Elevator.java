@@ -79,7 +79,7 @@ public class Elevator implements Subsystem {
 
   public void goToHeight(double height) {
     m_goalHeight = height;
-    m_pidController.setReference(height, SparkBase.ControlType.kPosition);
+    m_pidController.setSetpoint(height, SparkBase.ControlType.kPosition);
   }
 
   public boolean isAtHeight() {
