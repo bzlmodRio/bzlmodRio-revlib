@@ -49,7 +49,7 @@ def get_revlib_dependencies(
             ),
             "RevLibBackendDriver": dict(
                 artifact_install_name="BackendDriver",
-                deps = [],
+                deps=[],
             ),
             "RevLibWpiBackendDriver": dict(
                 artifact_install_name="REVLibWpi",
