@@ -44,6 +44,14 @@ jobs:
     - name: Build
       run: bazel ${{ matrix.bazel_options }} ${{ matrix.command }} //... -k ${{ matrix.config }} --verbose_failures --config=ci
       working-directory: tests
+    - name: Debug
+      if: failure()
+      run: cat /private/var/tmp/_bazel_runner/3baac10c50954df53c623fe6563d86b4/execroot/__main__/bazel-out/darwin_arm64-fastbuild/testlogs/java/revlibjava/test/test.log
+    - name: Debug
+      if: failure()
+      working-directory: tests
+      run: otool -L bazel-bin/cpp/revlib-cpp/test
+
 
 
   build_roborio:
