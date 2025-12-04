@@ -26,7 +26,7 @@ void Shooter::Stop() { m_motor.Set(0); }
 
 void Shooter::SpinAtRpm(units::revolutions_per_minute_t rpm) {
   double rpm_as_double = rpm.to<double>();
-  m_controller.SetReference(rpm_as_double,
+  m_controller.SetSetpoint(rpm_as_double,
                             rev::spark::SparkLowLevel::ControlType::kVelocity);
 }
 units::revolutions_per_minute_t Shooter::GetRpm() {

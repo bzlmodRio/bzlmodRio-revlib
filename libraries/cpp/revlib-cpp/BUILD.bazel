@@ -14,6 +14,8 @@ cc_library(
         "@bzlmodrio-allwpilib//libraries/cpp/wpilibc:shared",
         "@bzlmodrio-revlib//private/cpp/REVLib-cpp:shared",
         "@bzlmodrio-revlib//private/cpp/REVLib-driver:shared",
+        "@bzlmodrio-revlib//private/cpp/RevLibBackendDriver:shared",
+        "@bzlmodrio-revlib//private/cpp/RevLibWpiBackendDriver:shared",
     ],
 )
 
@@ -23,6 +25,8 @@ cc_library(
     deps = select({
         "//conditions:default": [
             "//private/cpp/REVLib-driver:shared",
+            "//private/cpp/RevLibBackendDriver:shared",
+            "//private/cpp/RevLibWpiBackendDriver:shared",
         ],
     }),
 )

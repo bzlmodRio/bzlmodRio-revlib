@@ -50,7 +50,7 @@ public class Shooter extends SubsystemBase {
     motorConfig.closedLoop.p(kP);
     motorConfig.closedLoop.i(kI);
     motorConfig.closedLoop.d(kD);
-    motorConfig.closedLoop.velocityFF(kF);
+    motorConfig.closedLoop.feedForward.kV(kF);
     m_motor.configure(
         motorConfig,
         SparkBase.ResetMode.kResetSafeParameters,
@@ -79,7 +79,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public void spinAtRpm(double rpm) {
-    m_pidController.setReference(rpm, SparkBase.ControlType.kVelocity);
+    m_pidController.setSetpoint(rpm, SparkBase.ControlType.kVelocity);
   }
 
   double getRpm() {

@@ -55,7 +55,7 @@ bool Elevator::IsAtHeight() {
 
 void Elevator::GoToHeight(units::meter_t height) {
   m_setpoint = height;
-  m_controller.SetReference(height.to<double>(),
+  m_controller.SetSetpoint(height.to<double>(),
                             rev::spark::SparkLowLevel::ControlType::kPosition);
 }
 
