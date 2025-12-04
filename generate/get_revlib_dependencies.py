@@ -32,6 +32,21 @@ def get_revlib_dependencies(
         fail_on_hash_miss=False,
         has_static_libraries=True,
         install_name_lookup={
+            "REVLib-cpp": dict(
+                artifact_install_name="REVLib",
+                deps=[
+                    "REVLib-driver",
+                    "RevLibBackendDriver",
+                    "RevLibWpiBackendDriver",
+                    allwpilib_dependency.container.get_cc_dependency("wpilibc-cpp"),
+                ],
+            ),
+            "REVLib-driver": dict(
+                artifact_install_name="REVLibDriver",
+                deps=[
+                    "RevLibBackendDriver",
+                ],
+            ),
             "RevLibBackendDriver": dict(
                 artifact_install_name="BackendDriver",
                 deps = [],
@@ -40,20 +55,6 @@ def get_revlib_dependencies(
                 artifact_install_name="REVLibWpi",
                 deps=[
                     allwpilib_dependency.container.get_cc_dependency("hal-cpp"),
-                ],
-            ),
-            "REVLib-cpp": dict(
-                artifact_install_name="REVLib",
-                deps=[
-                    "REVLib-driver",
-                    "RevLibBackendDriver",
-                    allwpilib_dependency.container.get_cc_dependency("wpilibc-cpp"),
-                ],
-            ),
-            "REVLib-driver": dict(
-                artifact_install_name="REVLibDriver",
-                deps=[
-                    "RevLibBackendDriver",
                 ],
             ),
         },
