@@ -381,6 +381,11 @@ def __setup_bzlmodrio_revlib_cpp_dependencies(mctx):
         url = "https://maven.revrobotics.com/com/revrobotics/frc/RevLibWpiBackendDriver/2026.0.0-beta-1/RevLibWpiBackendDriver-2026.0.0-beta-1-osxuniversal.zip",
         sha256 = "ac86dfe4b6357246aea2a4a5e1fe9efd8870238fee73538dead039ef2909cfe7",
         build_file = "@bzlmodrio-revlib//private/cpp/RevLibWpiBackendDriver:shared.BUILD.bazel",
+        patch_cmds = [
+            "install_name_tool -id @rpath/libREVLibWpi.dylib osx/universal/shared/libREVLibWpi.dylib",
+            "install_name_tool -change libwpiHal.dylib @rpath/libwpiHal.dylib osx/universal/shared/libREVLibWpi.dylib",
+            "install_name_tool -change libwpiutil.dylib @rpath/libwpiutil.dylib osx/universal/shared/libREVLibWpi.dylib",
+        ],
     )
     maybe(
         http_archive,
