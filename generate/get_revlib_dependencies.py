@@ -54,7 +54,13 @@ def get_revlib_dependencies(
 
     group.add_cc_meta_dependency(
         "revlib-cpp",
-        deps=["REVLib-cpp", "REVLib-driver", "RevLibBackendDriver", "RevLibWpiBackendDriver", "wpilibc-cpp"],
+        deps=[
+            "REVLib-cpp",
+            "REVLib-driver",
+            "RevLibBackendDriver",
+            "RevLibWpiBackendDriver",
+            "wpilibc-cpp",
+        ],
         platform_deps={},
         jni_deps={
             "//conditions:default": [
