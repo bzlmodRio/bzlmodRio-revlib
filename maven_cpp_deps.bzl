@@ -108,9 +108,7 @@ def __setup_bzlmodrio_revlib_cpp_dependencies(mctx):
         build_file = "@bzlmodrio-revlib//private/cpp/REVLib-cpp:shared.BUILD.bazel",
         patch_cmds = [
             "install_name_tool -id @rpath/libREVLib.dylib osx/universal/shared/libREVLib.dylib",
-            "install_name_tool -change libBackendDriver.dylib @rpath/libBackendDriver.dylib osx/universal/shared/libREVLib.dylib",
             "install_name_tool -change libREVLibDriver.dylib @rpath/libREVLibDriver.dylib osx/universal/shared/libREVLib.dylib",
-            "install_name_tool -change libREVLibWpi.dylib @rpath/libREVLibWpi.dylib osx/universal/shared/libREVLib.dylib",
             "install_name_tool -change libntcore.dylib @rpath/libntcore.dylib osx/universal/shared/libREVLib.dylib",
             "install_name_tool -change libwpiHal.dylib @rpath/libwpiHal.dylib osx/universal/shared/libREVLib.dylib",
             "install_name_tool -change libwpilibc.dylib @rpath/libwpilibc.dylib osx/universal/shared/libREVLib.dylib",
@@ -211,9 +209,8 @@ def __setup_bzlmodrio_revlib_cpp_dependencies(mctx):
         build_file = "@bzlmodrio-revlib//private/cpp/REVLib-driver:shared.BUILD.bazel",
         patch_cmds = [
             "install_name_tool -id @rpath/libREVLibDriver.dylib osx/universal/shared/libREVLibDriver.dylib",
-            "install_name_tool -change libBackendDriver.dylib @rpath/libBackendDriver.dylib osx/universal/shared/libREVLibDriver.dylib",
-            "install_name_tool -change libREVLibWpi.dylib @rpath/libREVLibWpi.dylib osx/universal/shared/libREVLibDriver.dylib",
             "install_name_tool -change libwpiHal.dylib @rpath/libwpiHal.dylib osx/universal/shared/libREVLibDriver.dylib",
+            "install_name_tool -change libwpimath.dylib @rpath/libwpimath.dylib osx/universal/shared/libREVLibDriver.dylib",
             "install_name_tool -change libwpiutil.dylib @rpath/libwpiutil.dylib osx/universal/shared/libREVLibDriver.dylib",
         ],
     )
@@ -302,9 +299,6 @@ def __setup_bzlmodrio_revlib_cpp_dependencies(mctx):
         build_file = "@bzlmodrio-revlib//private/cpp/RevLibBackendDriver:shared.BUILD.bazel",
         patch_cmds = [
             "install_name_tool -id @rpath/libBackendDriver.dylib osx/universal/shared/libBackendDriver.dylib",
-            "install_name_tool -change libREVLibWpi.dylib @rpath/libREVLibWpi.dylib osx/universal/shared/libBackendDriver.dylib",
-            "install_name_tool -change libwpiHal.dylib @rpath/libwpiHal.dylib osx/universal/shared/libBackendDriver.dylib",
-            "install_name_tool -change libwpiutil.dylib @rpath/libwpiutil.dylib osx/universal/shared/libBackendDriver.dylib",
         ],
     )
     maybe(
@@ -392,8 +386,6 @@ def __setup_bzlmodrio_revlib_cpp_dependencies(mctx):
         build_file = "@bzlmodrio-revlib//private/cpp/RevLibWpiBackendDriver:shared.BUILD.bazel",
         patch_cmds = [
             "install_name_tool -id @rpath/libREVLibWpi.dylib osx/universal/shared/libREVLibWpi.dylib",
-            "install_name_tool -change libwpiHal.dylib @rpath/libwpiHal.dylib osx/universal/shared/libREVLibWpi.dylib",
-            "install_name_tool -change libwpiutil.dylib @rpath/libwpiutil.dylib osx/universal/shared/libREVLibWpi.dylib",
         ],
     )
     maybe(
