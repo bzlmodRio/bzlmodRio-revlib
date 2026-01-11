@@ -35,8 +35,7 @@ Elevator::Elevator()
   motorConfig.closedLoop.I(kI);
   motorConfig.closedLoop.D(kD);
 
-  m_motor.Configure(motorConfig,
-                    rev::ResetMode::kNoResetSafeParameters,
+  m_motor.Configure(motorConfig, rev::ResetMode::kNoResetSafeParameters,
                     rev::PersistMode::kPersistParameters);
 }
 
