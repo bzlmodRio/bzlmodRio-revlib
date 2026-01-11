@@ -4,7 +4,9 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.PersistMode;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.ResetMode;
 import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkMax;
@@ -51,10 +53,7 @@ public class Shooter extends SubsystemBase {
     motorConfig.closedLoop.i(kI);
     motorConfig.closedLoop.d(kD);
     motorConfig.closedLoop.feedForward.kV(kF);
-    m_motor.configure(
-        motorConfig,
-        SparkBase.ResetMode.kResetSafeParameters,
-        SparkBase.PersistMode.kPersistParameters);
+    m_motor.configure(motorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     m_encoder = m_motor.getEncoder();
     m_pidController = m_motor.getClosedLoopController();
