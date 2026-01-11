@@ -36,8 +36,8 @@ Elevator::Elevator()
   motorConfig.closedLoop.D(kD);
 
   m_motor.Configure(motorConfig,
-                    rev::spark::SparkBase::ResetMode::kNoResetSafeParameters,
-                    rev::spark::SparkBase::PersistMode::kPersistParameters);
+                    rev::ResetMode::kNoResetSafeParameters,
+                    rev::PersistMode::kPersistParameters);
 }
 
 void Elevator::Log() {
