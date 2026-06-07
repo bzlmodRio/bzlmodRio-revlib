@@ -5205,8 +5205,8 @@
     },
     "@@bzlmodrio-revlib+//:maven_cpp_deps.bzl%setup_bzlmodrio_revlib_cpp_dependencies": {
       "general": {
-        "bzlTransitiveDigest": "yqdigVW2brownR1MI+/hLsNU3RDrGdYkS1fJUehKZlM=",
-        "usagesDigest": "eazD6S3vASU5s9oHSiRfmaZnL2u/isNDTZBhNI9WZ5M=",
+        "bzlTransitiveDigest": "VLsk5MR/H9P7bS+5ek5bSmX/72Uu21LJh8xCEVINRKU=",
+        "usagesDigest": "uK7Q4Ug5VKJZGYfXldj6lcfoha77oqrY51iyL6FxyfU=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {},
@@ -5645,8 +5645,8 @@
     },
     "@@bzlmodrio-revlib+//:maven_java_deps.bzl%setup_bzlmodrio_revlib_java_dependencies": {
       "general": {
-        "bzlTransitiveDigest": "5IsmW21YLxfHXhKTHj28+Xg/Og/DujtaDAVQhQ/LB5c=",
-        "usagesDigest": "dM1a1sa4J34rOJjhXphcJkrbVMw3nmbpaEexT/OJCAU=",
+        "bzlTransitiveDigest": "6c/fSyxyhwm87rq7vjnfHEnVNgMuMLK2kIcTqysXL8U=",
+        "usagesDigest": "b2ao1ZsvVBtOYGncz5XQvMWKRxSeMQqSD7FEEI88uSg=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {},
