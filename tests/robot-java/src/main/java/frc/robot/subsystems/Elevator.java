@@ -14,6 +14,7 @@ import org.wpilib.math.system.DCMotor;
 import org.wpilib.math.util.Units;
 import org.wpilib.simulation.ElevatorSim;
 import org.wpilib.simulation.SimDeviceSim;
+import org.wpilib.smartdashboard.SmartDashboard;
 import org.wpilib.system.RobotController;
 
 public class Elevator implements Subsystem {
@@ -72,7 +73,7 @@ public class Elevator implements Subsystem {
   }
 
   public void log() {
-    // SmartDashboard.putNumber("Elevator Height", m_encoder.getPosition());
+    SmartDashboard.putNumber("Elevator Height", m_encoder.getPosition().get());
   }
 
   public void goToHeight(double height) {
@@ -81,8 +82,7 @@ public class Elevator implements Subsystem {
   }
 
   public boolean isAtHeight() {
-    return false;
-    // return Math.abs(m_goalHeight - m_encoder.getPosition()) < 0.05;
+    return Math.abs(m_goalHeight - m_encoder.getPosition().get()) < 0.05;
   }
 
   @Override

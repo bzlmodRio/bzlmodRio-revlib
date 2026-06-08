@@ -82,8 +82,7 @@ public class Shooter extends SubsystemBase {
   }
 
   double getRpm() {
-    return 0;
-    // return m_encoder.getVelocity();
+    return m_encoder.getVelocity().get();
   }
 
   @Override

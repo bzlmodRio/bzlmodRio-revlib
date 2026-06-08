@@ -38,14 +38,14 @@ Elevator::Elevator()
                     rev::PersistMode::kPersistParameters);
 }
 
-// void Elevator::Log() {
-//   wpi::SmartDashboard::PutNumber("Elevator Height (m)",
-//                                  GetElevatorHeight().to<double>());
-// }
+void Elevator::Log() {
+  wpi::SmartDashboard::PutNumber("Elevator Height (m)",
+                                 GetElevatorHeight().to<double>());
+}
 
-// wpi::units::meter_t Elevator::GetElevatorHeight() {
-//   return wpi::units::meter_t{m_encoder.GetPosition()};
-// }
+wpi::units::meter_t Elevator::GetElevatorHeight() {
+  return wpi::units::meter_t{m_encoder.GetPosition().Get()};
+}
 
 bool Elevator::IsAtHeight() {
   return (GetElevatorHeight() - m_setpoint) < wpi::units::inch_t(2);

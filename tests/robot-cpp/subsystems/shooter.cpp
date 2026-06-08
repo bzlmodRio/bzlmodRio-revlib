@@ -32,23 +32,23 @@ void Shooter::SpinAtRpm(wpi::units::revolutions_per_minute_t rpm) {
   m_controller.SetSetpoint(rpm_as_double,
                            rev::spark::SparkLowLevel::ControlType::kVelocity);
 }
-// wpi::units::revolutions_per_minute_t Shooter::GetRpm() {
-//   return wpi::units::revolutions_per_minute_t{m_encoder.GetVelocity()};
-// }
+wpi::units::revolutions_per_minute_t Shooter::GetRpm() {
+  return wpi::units::revolutions_per_minute_t{m_encoder.GetVelocity().Get()};
+}
 
 void Shooter::Periodic() { Log(); }
 
-// void Shooter::SimulationPeriodic() {
-//   m_flywheelSim.SetInput(Eigen::Vector<double, 1>(
-//       m_motor.Get() * wpi::RobotController::GetInputVoltage()));
+void Shooter::SimulationPeriodic() {
+  m_flywheelSim.SetInput(Eigen::Vector<double, 1>(
+      m_motor.GetThrottle() * wpi::RobotController::GetInputVoltage()));
 
-//   m_flywheelSim.Update(20_ms);
-//   using rpm_t = wpi::units::revolutions_per_minute_t;
-//   m_encoderVelocitySim.SetThrottle(
-//       static_cast<rpm_t>(m_flywheelSim.GetAngularVelocity()).to<double>());
-// }
+  m_flywheelSim.Update(20_ms);
+  using rpm_t = wpi::units::revolutions_per_minute_t;
+  m_encoderVelocitySim.Set(
+      static_cast<rpm_t>(m_flywheelSim.GetAngularVelocity()).to<double>());
+}
 
-// void Shooter::Log() {
-//   wpi::SmartDashboard::PutNumber("Shooter Speed", m_motor.GetThrottle());
-//   wpi::SmartDashboard::PutNumber("Shooter RPM", GetRpm().to<double>());
-// }
+void Shooter::Log() {
+  wpi::SmartDashboard::PutNumber("Shooter Speed", m_motor.GetThrottle());
+  wpi::SmartDashboard::PutNumber("Shooter RPM", GetRpm().to<double>());
+}

@@ -110,11 +110,11 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void log() {
-    // SmartDashboard.putNumber("Left Distance", m_leftEncoder.getPosition());
-    // SmartDashboard.putNumber("Right Distance", m_rightEncoder.getPosition());
-    // SmartDashboard.putNumber("Left Speed", m_leftEncoder.getVelocity());
-    // SmartDashboard.putNumber("Right Speed", m_rightEncoder.getVelocity());
-    // SmartDashboard.putNumber("Gyro", m_gyro.getAngle());
+    SmartDashboard.putNumber("Left Distance", m_leftEncoder.getPosition().get());
+    SmartDashboard.putNumber("Right Distance", m_rightEncoder.getPosition().get());
+    SmartDashboard.putNumber("Left Speed", m_leftEncoder.getVelocity().get());
+    SmartDashboard.putNumber("Right Speed", m_rightEncoder.getVelocity().get());
+    SmartDashboard.putNumber("Gyro", m_gyro.getYawRadians());
   }
 
   public void arcadeDrive(double throttle, double rotation) {
@@ -133,14 +133,15 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getAverageDistance() {
-    return 0;
-    // return (m_leftEncoder.getPosition() + m_rightEncoder.getPosition()) / 2;
+    return (m_leftEncoder.getPosition().get() + m_rightEncoder.getPosition().get()) / 2;
   }
 
   void updateOdometry() {
-    // m_odometry.update(
-    //     m_gyro.getRotation2d(), m_leftEncoder.getPosition(), m_rightEncoder.getPosition());
-    // m_field.setRobotPose(m_odometry.getPoseMeters());
+    m_odometry.update(
+        m_gyro.getRotation2d(),
+        m_leftEncoder.getPosition().get(),
+        m_rightEncoder.getPosition().get());
+    m_field.setRobotPose(m_odometry.getPose());
   }
 
   @Override

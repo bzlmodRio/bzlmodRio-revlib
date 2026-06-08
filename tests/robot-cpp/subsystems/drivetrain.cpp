@@ -128,18 +128,18 @@ void DriveTrain::SimulationPeriodic() {
   m_gyroSim.SetYaw(-m_drivetrainSimulator.GetHeading().Degrees());
 }
 
-// wpi::units::meter_t DriveTrain::GetLeftEncoderDistance() {
-//   return wpi::units::meter_t{m_leftEncoder.GetPosition()};
-// }
+wpi::units::meter_t DriveTrain::GetLeftEncoderDistance() {
+  return wpi::units::meter_t{m_leftEncoder.GetPosition().Get()};
+}
 
-// wpi::units::meter_t DriveTrain::GetRightEncoderDistance() {
-//   return wpi::units::meter_t{m_rightEncoder.GetPosition()};
-// }
+wpi::units::meter_t DriveTrain::GetRightEncoderDistance() {
+  return wpi::units::meter_t{m_rightEncoder.GetPosition().Get()};
+}
 
-// wpi::units::meters_per_second_t DriveTrain::GetLeftEncoderVelocity() {
-//   return wpi::units::meters_per_second_t{m_leftEncoder.GetVelocity()};
-// }
+wpi::units::meters_per_second_t DriveTrain::GetLeftEncoderVelocity() {
+  return wpi::units::meters_per_second_t{m_leftEncoder.GetVelocity().Get()};
+}
 
-// wpi::units::meters_per_second_t DriveTrain::GetRightEncoderVelocity() {
-//   return wpi::units::meters_per_second_t{m_rightEncoder.GetVelocity()};
-// }
+wpi::units::meters_per_second_t DriveTrain::GetRightEncoderVelocity() {
+  return wpi::units::meters_per_second_t{m_rightEncoder.GetVelocity().Get()};
+}
