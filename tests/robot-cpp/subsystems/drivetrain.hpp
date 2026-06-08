@@ -1,26 +1,27 @@
 #pragma once
 
-#include <frc/ADXRS450_Gyro.h>
-#include <frc/drive/DifferentialDrive.h>
-#include <frc/kinematics/DifferentialDriveOdometry.h>
-#include <frc/simulation/ADXRS450_GyroSim.h>
-#include <frc/simulation/DifferentialDrivetrainSim.h>
-#include <frc/smartdashboard/Field2d.h>
-#include <frc2/command/SubsystemBase.h>
-#include <hal/SimDevice.h>
+#include <wpi/hal/SimDevice.hpp>
+#include <wpi/hardware/imu/OnboardIMU.hpp>
+#include <wpi/drive/DifferentialDrive.hpp>
+#include <wpi/math/kinematics/DifferentialDriveOdometry.hpp>
+#include <wpi/simulation/OnboardIMUSim.hpp>
+#include <wpi/simulation/DifferentialDrivetrainSim.hpp>
+#include <wpi/smartdashboard/Field2d.hpp>
+#include <wpi/commands2/SubsystemBase.hpp>
+#include <wpi/hal/SimDevice.h>
 #include <rev/SparkMax.h>
 #include <rev/SparkRelativeEncoder.h>
-#include <units/length.h>
-#include <units/velocity.h>
+#include <wpi/units/length.hpp>
+#include <wpi/units/velocity.hpp>
 
-class DriveTrain : public frc2::SubsystemBase {
+class DriveTrain : public wpi::cmd::SubsystemBase {
  public:
   DriveTrain();
 
   void ArcadeDrive(double throttle, double rotation);
 
   double GetHeadingDegrees();
-  frc::Rotation2d GetRotation();
+  wpi::math::Rotation2d GetRotation();
 
   void Reset();
 
@@ -32,11 +33,11 @@ class DriveTrain : public frc2::SubsystemBase {
 
   void SimulationPeriodic() override;
 
-  units::meter_t GetLeftEncoderDistance();
-  units::meter_t GetRightEncoderDistance();
+  wpi::units::meter_t GetLeftEncoderDistance();
+  wpi::units::meter_t GetRightEncoderDistance();
 
-  units::meters_per_second_t GetLeftEncoderVelocity();
-  units::meters_per_second_t GetRightEncoderVelocity();
+  wpi::units::meters_per_second_t GetLeftEncoderVelocity();
+  wpi::units::meters_per_second_t GetRightEncoderVelocity();
 
  private:
   void Log();
@@ -49,17 +50,17 @@ class DriveTrain : public frc2::SubsystemBase {
   rev::spark::SparkMax m_rightMotorB;
   rev::spark::SparkRelativeEncoder m_rightEncoder;
 
-  frc::ADXRS450_Gyro m_gyro;
-  frc::DifferentialDrive m_robotDrive;
+  wpi::OnboardIMU m_gyro;
+  wpi::DifferentialDrive m_robotDrive;
 
-  frc::DifferentialDriveOdometry m_odometry;
-  frc::Field2d m_field;
+  wpi::math::DifferentialDriveOdometry m_odometry;
+  wpi::Field2d m_field;
 
   // Simulation
-  frc::sim::ADXRS450_GyroSim m_gyroSim;
-  hal::SimDouble m_leftEncoderPositionSim;
-  hal::SimDouble m_leftEncoderVelocitySim;
-  hal::SimDouble m_rightEncoderPositionSim;
-  hal::SimDouble m_rightEncoderVelocitySim;
-  frc::sim::DifferentialDrivetrainSim m_drivetrainSimulator;
+  wpi::sim::OnboardIMUSim m_gyroSim;
+  wpi::hal::SimDouble m_leftEncoderPositionSim;
+  wpi::hal::SimDouble m_leftEncoderVelocitySim;
+  wpi::hal::SimDouble m_rightEncoderPositionSim;
+  wpi::hal::SimDouble m_rightEncoderVelocitySim;
+  wpi::sim::DifferentialDrivetrainSim m_drivetrainSimulator;
 };

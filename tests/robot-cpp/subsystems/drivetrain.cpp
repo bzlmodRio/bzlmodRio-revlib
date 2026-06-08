@@ -1,15 +1,15 @@
 #include "robot-cpp/subsystems/drivetrain.hpp"
 
-#include <frc/Joystick.h>
-#include <frc/RobotController.h>
-#include <frc/smartdashboard/SmartDashboard.h>
+#include <wpi/driverstation/Joystick.hpp>
+#include <wpi/system/RobotController.hpp>
+#include <wpi/smartdashboard/SmartDashboard.hpp>
 #include <rev/config/SparkMaxConfig.h>
-#include <units/length.h>
+#include <wpi/units/length.hpp>
 
 #include <iostream>
 #include <numbers>
 
-#include "frc/simulation/SimDeviceSim.h"
+#include "wpi/simulation/SimDeviceSim.hpp"
 #include "robot-cpp/subsystems/ports.hpp"
 
 DriveTrain::DriveTrain()
@@ -24,21 +24,21 @@ DriveTrain::DriveTrain()
                     rev::spark::SparkMax::MotorType::kBrushless},
       m_rightEncoder{m_rightMotorA.GetEncoder()},
       m_robotDrive{m_leftMotorA, m_rightMotorA},
-      m_odometry{frc::Rotation2d(), 0_m, 0_m},
+      m_odometry{wpi::math::Rotation2d(), 0_m, 0_m},
       m_gyroSim{m_gyro},
       m_drivetrainSimulator(
-          frc::sim::DifferentialDrivetrainSim::CreateKitbotSim(
-              frc::sim::DifferentialDrivetrainSim::KitbotMotor::DualCIMPerSide,
+          wpi::sim::DifferentialDrivetrainSim::CreateKitbotSim(
+              wpi::sim::DifferentialDrivetrainSim::KitbotMotor::DualCIMPerSide,
               12.0, 6_in)) {
-  frc::SmartDashboard::PutData("Field", &m_field);
+  wpi::SmartDashboard::PutData("Field", &m_field);
 
-  frc::sim::SimDeviceSim leftDeviceSim(
+  wpi::sim::SimDeviceSim leftDeviceSim(
       ("SPARK MAX [" + std::to_string(m_leftMotorA.GetDeviceId()) + "]")
           .c_str());
   m_leftEncoderPositionSim = leftDeviceSim.GetDouble("Position");
   m_leftEncoderVelocitySim = leftDeviceSim.GetDouble("Velocity");
 
-  frc::sim::SimDeviceSim rightDeviceSim(
+  wpi::sim::SimDeviceSim rightDeviceSim(
       ("SPARK MAX [" + std::to_string(m_rightMotorA.GetDeviceId()) + "]")
           .c_str());
   std::cout << "Hello: " << rightDeviceSim << ", " << leftDeviceSim
@@ -62,15 +62,15 @@ DriveTrain::DriveTrain()
 }
 
 void DriveTrain::Log() {
-  frc::SmartDashboard::PutNumber("Left Distance",
+  wpi::SmartDashboard::PutNumber("Left Distance",
                                  GetLeftEncoderDistance().to<double>());
-  frc::SmartDashboard::PutNumber("Right Distance",
+  wpi::SmartDashboard::PutNumber("Right Distance",
                                  GetRightEncoderDistance().to<double>());
-  frc::SmartDashboard::PutNumber("Left Speed",
+  wpi::SmartDashboard::PutNumber("Left Speed",
                                  GetLeftEncoderVelocity().to<double>());
-  frc::SmartDashboard::PutNumber("Right Speed",
+  wpi::SmartDashboard::PutNumber("Right Speed",
                                  GetRightEncoderVelocity().to<double>());
-  frc::SmartDashboard::PutNumber("Gyro", GetHeadingDegrees());
+  wpi::SmartDashboard::PutNumber("Gyro", GetHeadingDegrees());
 }
 
 void DriveTrain::ArcadeDrive(double throttle, double rotation) {
@@ -81,7 +81,7 @@ double DriveTrain::GetHeadingDegrees() {
   return GetRotation().Degrees().to<double>();
 }
 
-frc::Rotation2d DriveTrain::GetRotation() { return m_gyro.GetRotation2d(); }
+wpi::math::Rotation2d DriveTrain::GetRotation() { return m_gyro.GetRotation2d(); }
 
 void DriveTrain::Reset() {
   m_gyro.Reset();
@@ -110,10 +110,10 @@ void DriveTrain::SimulationPeriodic() {
   // simulation, and write the simulated positions and velocities to our
   // simulated encoder and gyro. We negate the right side so that positive
   // voltages make the right side move forward.
-  m_drivetrainSimulator.SetInputs(units::volt_t{m_leftMotorA.Get()} *
-                                      frc::RobotController::GetInputVoltage(),
-                                  units::volt_t{-m_rightMotorA.Get()} *
-                                      frc::RobotController::GetInputVoltage());
+  m_drivetrainSimulator.SetInputs(wpi::units::volt_t{m_leftMotorA.Get()} *
+                                      wpi::RobotController::GetInputVoltage(),
+                                  wpi::units::volt_t{-m_rightMotorA.Get()} *
+                                      wpi::RobotController::GetInputVoltage());
   m_drivetrainSimulator.Update(20_ms);
 
   m_leftEncoderPositionSim.Set(
@@ -127,18 +127,18 @@ void DriveTrain::SimulationPeriodic() {
   m_gyroSim.SetAngle(-m_drivetrainSimulator.GetHeading().Degrees());
 }
 
-units::meter_t DriveTrain::GetLeftEncoderDistance() {
-  return units::meter_t{m_leftEncoder.GetPosition()};
+wpi::units::meter_t DriveTrain::GetLeftEncoderDistance() {
+  return wpi::units::meter_t{m_leftEncoder.GetPosition()};
 }
 
-units::meter_t DriveTrain::GetRightEncoderDistance() {
-  return units::meter_t{m_rightEncoder.GetPosition()};
+wpi::units::meter_t DriveTrain::GetRightEncoderDistance() {
+  return wpi::units::meter_t{m_rightEncoder.GetPosition()};
 }
 
-units::meters_per_second_t DriveTrain::GetLeftEncoderVelocity() {
-  return units::meters_per_second_t{m_leftEncoder.GetVelocity()};
+wpi::units::meters_per_second_t DriveTrain::GetLeftEncoderVelocity() {
+  return wpi::units::meters_per_second_t{m_leftEncoder.GetVelocity()};
 }
 
-units::meters_per_second_t DriveTrain::GetRightEncoderVelocity() {
-  return units::meters_per_second_t{m_rightEncoder.GetVelocity()};
+wpi::units::meters_per_second_t DriveTrain::GetRightEncoderVelocity() {
+  return wpi::units::meters_per_second_t{m_rightEncoder.GetVelocity()};
 }

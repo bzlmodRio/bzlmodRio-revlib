@@ -1,13 +1,13 @@
 #pragma once
 
-#include <frc/simulation/FlywheelSim.h>
-#include <frc2/command/SubsystemBase.h>
-#include <hal/SimDevice.h>
+#include <wpi/simulation/FlywheelSim.hpp>
+#include <wpi/commands2/SubsystemBase.hpp>
+#include <wpi/hal/SimDevice.hpp>
 #include <rev/SparkClosedLoopController.h>
 #include <rev/SparkMax.h>
 #include <rev/SparkRelativeEncoder.h>
 
-class Shooter : public frc2::SubsystemBase {
+class Shooter : public wpi::cmd::SubsystemBase {
  public:
   Shooter();
 
@@ -16,9 +16,9 @@ class Shooter : public frc2::SubsystemBase {
 
   void Stop();
 
-  void SpinAtRpm(units::revolutions_per_minute_t rpm);
+  void SpinAtRpm(wpi::units::revolutions_per_minute_t rpm);
 
-  units::revolutions_per_minute_t GetRpm();
+  wpi::units::revolutions_per_minute_t GetRpm();
 
  private:
   void Log();
@@ -28,6 +28,6 @@ class Shooter : public frc2::SubsystemBase {
   rev::spark::SparkClosedLoopController m_controller;
 
   // Sim
-  hal::SimDouble m_encoderVelocitySim;
-  frc::sim::FlywheelSim m_flywheelSim;
+  wpi::hal::SimDouble m_encoderVelocitySim;
+  wpi::sim::FlywheelSim m_flywheelSim;
 };
