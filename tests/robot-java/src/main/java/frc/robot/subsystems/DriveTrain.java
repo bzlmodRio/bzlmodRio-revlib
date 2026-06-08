@@ -9,18 +9,18 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.ResetMode;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
-import edu.wpi.first.hal.SimDouble;
-import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.simulation.ADXRS450_GyroSim;
-import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
-import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
-import edu.wpi.first.wpilibj.smartdashboard.Field2d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import org.wpilib.command2.SubsystemBase;
+import org.wpilib.drive.DifferentialDrive;
+import org.wpilib.framework.RobotBase;
+import org.wpilib.hardware.hal.SimDouble;
+import org.wpilib.hardware.imu.OnboardIMU;
+import org.wpilib.math.kinematics.DifferentialDriveOdometry;
+import org.wpilib.simulation.ADXRS450_GyroSim;
+import org.wpilib.simulation.DifferentialDrivetrainSim;
+import org.wpilib.simulation.SimDeviceSim;
+import org.wpilib.smartdashboard.Field2d;
+import org.wpilib.smartdashboard.SmartDashboard;
+import org.wpilib.system.RobotController;
 
 public class DriveTrain extends SubsystemBase {
   private final SparkMax m_leftLeader;
@@ -32,7 +32,7 @@ public class DriveTrain extends SubsystemBase {
 
   private final RelativeEncoder m_leftEncoder;
   private final RelativeEncoder m_rightEncoder;
-  private final ADXRS450_Gyro m_gyro;
+  private final OnboardIMU m_gyro;
 
   private final DifferentialDriveOdometry m_odometry;
   private final Field2d m_field;
@@ -85,7 +85,7 @@ public class DriveTrain extends SubsystemBase {
     SmartDashboard.putData("Field", m_field);
 
     if (RobotBase.isSimulation()) {
-      m_gyroSim = new ADXRS450_GyroSim(m_gyro);
+      m_gyroSim = new OnboardIMUSim();
 
       SimDeviceSim leftDeviceSim =
           new SimDeviceSim("SPARK MAX [" + m_leftLeader.getDeviceId() + "] RELATIVE ENCODER");

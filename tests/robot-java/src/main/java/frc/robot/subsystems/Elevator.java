@@ -7,15 +7,15 @@ import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
-import edu.wpi.first.hal.SimDouble;
-import edu.wpi.first.math.system.plant.DCMotor;
-import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.simulation.ElevatorSim;
-import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Subsystem;
+import org.wpilib.command2.Subsystem;
+import org.wpilib.framework.RobotBase;
+import org.wpilib.hardware.hal.SimDouble;
+import org.wpilib.math.system.plant.DCMotor;
+import org.wpilib.math.util.Units;
+import org.wpilib.system.RobotController;
+import org.wpilib.simulation.ElevatorSim;
+import org.wpilib.simulation.SimDeviceSim;
+import org.wpilib.smartdashboard.SmartDashboard;
 
 public class Elevator implements Subsystem {
   private static final double kP = 4;
