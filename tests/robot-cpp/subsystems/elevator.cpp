@@ -23,7 +23,7 @@ wpi::math::DCMotor kElevatorGearbox = wpi::math::DCMotor::Vex775Pro(4);
 }  // namespace
 
 Elevator::Elevator()
-    : m_motor{kElevatorMotorPort, rev::spark::SparkMax::MotorType::kBrushless},
+    : m_motor{0, kElevatorMotorPort, rev::spark::SparkMax::MotorType::kBrushless},
       m_encoder(m_motor.GetEncoder()),
       m_controller(m_motor.GetClosedLoopController()),
       m_elevatorSim(kElevatorGearbox, kElevatorGearing, kCarriageMass,
@@ -38,14 +38,14 @@ Elevator::Elevator()
                     rev::PersistMode::kPersistParameters);
 }
 
-void Elevator::Log() {
-  wpi::SmartDashboard::PutNumber("Elevator Height (m)",
-                                 GetElevatorHeight().to<double>());
-}
+// void Elevator::Log() {
+//   wpi::SmartDashboard::PutNumber("Elevator Height (m)",
+//                                  GetElevatorHeight().to<double>());
+// }
 
-wpi::units::meter_t Elevator::GetElevatorHeight() {
-  return wpi::units::meter_t{m_encoder.GetPosition()};
-}
+// wpi::units::meter_t Elevator::GetElevatorHeight() {
+//   return wpi::units::meter_t{m_encoder.GetPosition()};
+// }
 
 bool Elevator::IsAtHeight() {
   return (GetElevatorHeight() - m_setpoint) < wpi::units::inch_t(2);
@@ -61,9 +61,9 @@ void Elevator::Periodic() { Log(); }
 
 void Elevator::SimulationPeriodic() {
   m_elevatorSim.SetInput(Eigen::Vector<double, 1>(
-      m_motor.Get() * wpi::RobotController::GetInputVoltage()));
+      m_motor.GetThrottle() * wpi::RobotController::GetInputVoltage()));
   m_elevatorSim.Update(20_ms);
   m_encoderPositionSim.Set(m_elevatorSim.GetPosition().to<double>());
 }
 
-void Elevator::Stop() { m_motor.Set(0); }
+void Elevator::Stop() { m_motor.SetThrottle(0); }

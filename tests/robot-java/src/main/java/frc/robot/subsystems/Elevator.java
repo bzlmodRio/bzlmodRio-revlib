@@ -10,12 +10,11 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import org.wpilib.command2.Subsystem;
 import org.wpilib.framework.RobotBase;
 import org.wpilib.hardware.hal.SimDouble;
-import org.wpilib.math.system.plant.DCMotor;
+import org.wpilib.math.system.DCMotor;
 import org.wpilib.math.util.Units;
-import org.wpilib.system.RobotController;
 import org.wpilib.simulation.ElevatorSim;
 import org.wpilib.simulation.SimDeviceSim;
-import org.wpilib.smartdashboard.SmartDashboard;
+import org.wpilib.system.RobotController;
 
 public class Elevator implements Subsystem {
   private static final double kP = 4;
@@ -46,7 +45,7 @@ public class Elevator implements Subsystem {
   /** Create a new elevator subsystem. */
   @SuppressWarnings("this-escape")
   public Elevator() {
-    m_motor = new SparkMax(PortMap.kElevatorMotorPort, SparkMax.MotorType.kBrushless);
+    m_motor = new SparkMax(0, PortMap.kElevatorMotorPort, SparkMax.MotorType.kBrushless);
     SparkMaxConfig motorConfig = new SparkMaxConfig();
     motorConfig.encoder.positionConversionFactor(kArmEncoderDistPerPulse);
     motorConfig.closedLoop.p(kP);
@@ -73,7 +72,7 @@ public class Elevator implements Subsystem {
   }
 
   public void log() {
-    SmartDashboard.putNumber("Elevator Height", m_encoder.getPosition());
+    // SmartDashboard.putNumber("Elevator Height", m_encoder.getPosition());
   }
 
   public void goToHeight(double height) {
@@ -82,7 +81,8 @@ public class Elevator implements Subsystem {
   }
 
   public boolean isAtHeight() {
-    return Math.abs(m_goalHeight - m_encoder.getPosition()) < 0.05;
+    return false;
+    // return Math.abs(m_goalHeight - m_encoder.getPosition()) < 0.05;
   }
 
   @Override
@@ -92,12 +92,12 @@ public class Elevator implements Subsystem {
 
   @Override
   public void simulationPeriodic() {
-    m_elevatorSim.setInput(m_motor.get() * RobotController.getInputVoltage());
+    m_elevatorSim.setInput(m_motor.getThrottle() * RobotController.getInputVoltage());
     m_elevatorSim.update(0.02);
-    m_encoderPositionSim.set(m_elevatorSim.getPositionMeters());
+    m_encoderPositionSim.set(m_elevatorSim.getPosition());
   }
 
   public void stop() {
-    m_motor.set(0);
+    m_motor.setThrottle(0);
   }
 }

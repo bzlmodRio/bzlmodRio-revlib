@@ -15,13 +15,13 @@ import org.wpilib.command2.SubsystemBase;
 import org.wpilib.framework.RobotBase;
 import org.wpilib.hardware.hal.SimDouble;
 import org.wpilib.math.numbers.N1;
+import org.wpilib.math.system.DCMotor;
 import org.wpilib.math.system.LinearSystem;
-import org.wpilib.math.system.plant.DCMotor;
-import org.wpilib.math.system.plant.LinearSystemId;
-import org.wpilib.system.RobotController;
+import org.wpilib.math.system.Models;
 import org.wpilib.simulation.FlywheelSim;
 import org.wpilib.simulation.SimDeviceSim;
 import org.wpilib.smartdashboard.SmartDashboard;
+import org.wpilib.system.RobotController;
 
 /**
  * The claw subsystem is a simple system with a motor for opening and closing. If using stronger
@@ -47,7 +47,7 @@ public class Shooter extends SubsystemBase {
 
   /** Create a new claw subsystem. */
   public Shooter() {
-    m_motor = new SparkMax(PortMap.kShooterMotorPort, SparkBase.MotorType.kBrushless);
+    m_motor = new SparkMax(0, PortMap.kShooterMotorPort, SparkBase.MotorType.kBrushless);
     SparkMaxConfig motorConfig = new SparkMaxConfig();
     motorConfig.closedLoop.p(kP);
     motorConfig.closedLoop.i(kI);
@@ -63,18 +63,18 @@ public class Shooter extends SubsystemBase {
       m_encoderVelocitySim = deviceSim.getDouble("Velocity");
 
       LinearSystem<N1, N1, N1> plant =
-          LinearSystemId.createFlywheelSystem(kGearbox, kGearing, kInertia);
+          Models.flywheelFromPhysicalConstants(kGearbox, kGearing, kInertia);
       m_flywheelSim = new FlywheelSim(plant, kGearbox);
     }
   }
 
   public void log() {
-    SmartDashboard.putNumber("Shooter Speed", m_motor.get());
+    SmartDashboard.putNumber("Shooter Speed", m_motor.getThrottle());
     SmartDashboard.putNumber("Shooter RPM", getRpm());
   }
 
   public void stop() {
-    m_motor.set(0);
+    m_motor.setThrottle(0);
   }
 
   public void spinAtRpm(double rpm) {
@@ -82,7 +82,8 @@ public class Shooter extends SubsystemBase {
   }
 
   double getRpm() {
-    return m_encoder.getVelocity();
+    return 0;
+    // return m_encoder.getVelocity();
   }
 
   @Override
@@ -92,9 +93,9 @@ public class Shooter extends SubsystemBase {
 
   @Override
   public void simulationPeriodic() {
-    m_flywheelSim.setInput(m_motor.get() * RobotController.getInputVoltage());
+    m_flywheelSim.setInput(m_motor.getThrottle() * RobotController.getInputVoltage());
 
     m_flywheelSim.update(0.02);
-    m_encoderVelocitySim.set(m_flywheelSim.getAngularVelocityRPM());
+    m_encoderVelocitySim.set(m_flywheelSim.getAngularVelocity());
   }
 }

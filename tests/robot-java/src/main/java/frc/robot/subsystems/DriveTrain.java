@@ -15,8 +15,8 @@ import org.wpilib.framework.RobotBase;
 import org.wpilib.hardware.hal.SimDouble;
 import org.wpilib.hardware.imu.OnboardIMU;
 import org.wpilib.math.kinematics.DifferentialDriveOdometry;
-import org.wpilib.simulation.ADXRS450_GyroSim;
 import org.wpilib.simulation.DifferentialDrivetrainSim;
+import org.wpilib.simulation.OnboardIMUSim;
 import org.wpilib.simulation.SimDeviceSim;
 import org.wpilib.smartdashboard.Field2d;
 import org.wpilib.smartdashboard.SmartDashboard;
@@ -38,7 +38,6 @@ public class DriveTrain extends SubsystemBase {
   private final Field2d m_field;
 
   // Sim
-  private ADXRS450_GyroSim m_gyroSim;
   private DifferentialDrivetrainSim m_drivetrainSimulator;
 
   private SimDouble m_leftEncoderPositionSim;
@@ -50,24 +49,27 @@ public class DriveTrain extends SubsystemBase {
     SparkMaxConfig baseConfig = new SparkMaxConfig();
     baseConfig.encoder.positionConversionFactor((4.0 / 12.0 * Math.PI) / 360.0);
 
-    m_leftLeader = new SparkMax(PortMap.kDrivetrainMotorLeftAPort, SparkMax.MotorType.kBrushless);
+    m_leftLeader =
+        new SparkMax(0, PortMap.kDrivetrainMotorLeftAPort, SparkMax.MotorType.kBrushless);
     SparkMaxConfig leftLeaderConfig = new SparkMaxConfig().apply(baseConfig);
     m_leftLeader.configure(
         leftLeaderConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
-    m_leftFollower = new SparkMax(PortMap.kDrivetrainMotorLeftBPort, SparkMax.MotorType.kBrushless);
+    m_leftFollower =
+        new SparkMax(0, PortMap.kDrivetrainMotorLeftBPort, SparkMax.MotorType.kBrushless);
     SparkMaxConfig leftFollowerConfig = new SparkMaxConfig().apply(leftLeaderConfig);
     leftFollowerConfig.follow(m_leftLeader);
     m_leftLeader.configure(
         leftFollowerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
-    m_rightLeader = new SparkMax(PortMap.kDrivetrainMotorRightAPort, SparkMax.MotorType.kBrushless);
+    m_rightLeader =
+        new SparkMax(0, PortMap.kDrivetrainMotorRightAPort, SparkMax.MotorType.kBrushless);
     SparkMaxConfig rightLeaderConfig = new SparkMaxConfig().apply(baseConfig);
     m_rightLeader.configure(
         rightLeaderConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     m_rightFollower =
-        new SparkMax(PortMap.kDrivetrainMotorRightBPort, SparkMax.MotorType.kBrushless);
+        new SparkMax(0, PortMap.kDrivetrainMotorRightBPort, SparkMax.MotorType.kBrushless);
     SparkMaxConfig rightFollowerConfig = new SparkMaxConfig().apply(rightLeaderConfig);
     rightFollowerConfig.follow(m_rightLeader);
     m_rightFollower.configure(
@@ -77,7 +79,7 @@ public class DriveTrain extends SubsystemBase {
 
     m_leftEncoder = m_leftLeader.getEncoder();
     m_rightEncoder = m_rightLeader.getEncoder();
-    m_gyro = new ADXRS450_Gyro();
+    m_gyro = new OnboardIMU(OnboardIMU.MountOrientation.FLAT);
 
     m_odometry = new DifferentialDriveOdometry(m_gyro.getRotation2d(), 0, 0);
     m_field = new Field2d();
@@ -85,7 +87,6 @@ public class DriveTrain extends SubsystemBase {
     SmartDashboard.putData("Field", m_field);
 
     if (RobotBase.isSimulation()) {
-      m_gyroSim = new OnboardIMUSim();
 
       SimDeviceSim leftDeviceSim =
           new SimDeviceSim("SPARK MAX [" + m_leftLeader.getDeviceId() + "] RELATIVE ENCODER");
@@ -101,19 +102,19 @@ public class DriveTrain extends SubsystemBase {
       // m_rightEncoderSim = new EncoderSim(m_rightEncoder);
       m_drivetrainSimulator =
           DifferentialDrivetrainSim.createKitbotSim(
-              DifferentialDrivetrainSim.KitbotMotor.kDualCIMPerSide,
-              DifferentialDrivetrainSim.KitbotGearing.k12p75,
-              DifferentialDrivetrainSim.KitbotWheelSize.kSixInch,
+              DifferentialDrivetrainSim.KitbotMotor.DUAL_CIM_PER_SIDE,
+              DifferentialDrivetrainSim.KitbotGearing.RATIO_12P75,
+              DifferentialDrivetrainSim.KitbotWheelSize.SIX_INCH,
               null);
     }
   }
 
   public void log() {
-    SmartDashboard.putNumber("Left Distance", m_leftEncoder.getPosition());
-    SmartDashboard.putNumber("Right Distance", m_rightEncoder.getPosition());
-    SmartDashboard.putNumber("Left Speed", m_leftEncoder.getVelocity());
-    SmartDashboard.putNumber("Right Speed", m_rightEncoder.getVelocity());
-    SmartDashboard.putNumber("Gyro", m_gyro.getAngle());
+    // SmartDashboard.putNumber("Left Distance", m_leftEncoder.getPosition());
+    // SmartDashboard.putNumber("Right Distance", m_rightEncoder.getPosition());
+    // SmartDashboard.putNumber("Left Speed", m_leftEncoder.getVelocity());
+    // SmartDashboard.putNumber("Right Speed", m_rightEncoder.getVelocity());
+    // SmartDashboard.putNumber("Gyro", m_gyro.getAngle());
   }
 
   public void arcadeDrive(double throttle, double rotation) {
@@ -121,24 +122,25 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getHeading() {
-    return m_gyro.getAngle();
+    return m_gyro.getYawRadians();
   }
 
   /** Reset the robots sensors to the zero states. */
   public void reset() {
-    m_gyro.reset();
+    m_gyro.resetYaw();
     m_leftEncoder.setPosition(0);
     m_rightEncoder.setPosition(0);
   }
 
   public double getAverageDistance() {
-    return (m_leftEncoder.getPosition() + m_rightEncoder.getPosition()) / 2;
+    return 0;
+    // return (m_leftEncoder.getPosition() + m_rightEncoder.getPosition()) / 2;
   }
 
   void updateOdometry() {
-    m_odometry.update(
-        m_gyro.getRotation2d(), m_leftEncoder.getPosition(), m_rightEncoder.getPosition());
-    m_field.setRobotPose(m_odometry.getPoseMeters());
+    // m_odometry.update(
+    //     m_gyro.getRotation2d(), m_leftEncoder.getPosition(), m_rightEncoder.getPosition());
+    // m_field.setRobotPose(m_odometry.getPoseMeters());
   }
 
   @Override
@@ -150,19 +152,19 @@ public class DriveTrain extends SubsystemBase {
   @Override
   public void simulationPeriodic() {
     m_drivetrainSimulator.setInputs(
-        m_leftLeader.get() * RobotController.getInputVoltage(),
-        m_rightLeader.get() * RobotController.getInputVoltage());
+        m_leftLeader.getThrottle() * RobotController.getInputVoltage(),
+        m_rightLeader.getThrottle() * RobotController.getInputVoltage());
     m_drivetrainSimulator.update(0.02);
 
-    m_leftEncoderPositionSim.set(m_drivetrainSimulator.getLeftPositionMeters());
-    m_leftEncoderVelocitySim.set(m_drivetrainSimulator.getLeftVelocityMetersPerSecond());
-    m_rightEncoderPositionSim.set(m_drivetrainSimulator.getRightPositionMeters());
-    m_rightEncoderVelocitySim.set(m_drivetrainSimulator.getRightVelocityMetersPerSecond());
-    m_gyroSim.setAngle(-m_drivetrainSimulator.getHeading().getDegrees());
+    m_leftEncoderPositionSim.set(m_drivetrainSimulator.getLeftPosition());
+    m_leftEncoderVelocitySim.set(m_drivetrainSimulator.getLeftVelocity());
+    m_rightEncoderPositionSim.set(m_drivetrainSimulator.getRightPosition());
+    m_rightEncoderVelocitySim.set(m_drivetrainSimulator.getRightVelocity());
+    OnboardIMUSim.setYaw(-m_drivetrainSimulator.getHeading().getDegrees());
   }
 
   public void stop() {
-    m_leftLeader.set(0);
-    m_rightLeader.set(0);
+    m_leftLeader.setThrottle(0);
+    m_rightLeader.setThrottle(0);
   }
 }
