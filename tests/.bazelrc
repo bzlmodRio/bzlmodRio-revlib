@@ -30,7 +30,7 @@ build:bookworm64 --platform_suffix=bookworm64
 
 # Alias toolchain names to what wpilibsuite uses for CI/Artifact naming
 build:athena --config=roborio
-build:linuxarm32 --config=raspibookworm32
+build:linuxarm32 --config=rpbookworm32
 build:linuxarm64 --config=bookworm64
 
 test --test_output=errors
