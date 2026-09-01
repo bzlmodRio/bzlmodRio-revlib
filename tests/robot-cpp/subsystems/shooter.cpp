@@ -1,8 +1,8 @@
 #include "robot-cpp/subsystems/shooter.hpp"
 
-#include <wpi/system/RobotController.hpp>
-#include <wpi/smartdashboard/SmartDashboard.hpp>
 #include <wpi/math/system/Models.hpp>
+#include <wpi/smartdashboard/SmartDashboard.hpp>
+#include <wpi/system/RobotController.hpp>
 
 #include "robot-cpp/subsystems/ports.hpp"
 
@@ -20,7 +20,8 @@ wpi::sim::FlywheelSim flywheelSim{kPlant, kGearbox};
 }  // namespace
 
 Shooter::Shooter()
-    : m_motor{0, kShooterMotorPort, rev::spark::SparkMax::MotorType::kBrushless},
+    : m_motor{0, kShooterMotorPort,
+              rev::spark::SparkMax::MotorType::kBrushless},
       m_encoder(m_motor.GetEncoder()),
       m_controller(m_motor.GetClosedLoopController()),
       m_flywheelSim(kPlant, kGearbox) {}

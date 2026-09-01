@@ -1,15 +1,16 @@
 #pragma once
 
-#include <wpi/hardware/imu/OnboardIMU.hpp>
-#include <wpi/drive/DifferentialDrive.hpp>
-#include <wpi/math/kinematics/DifferentialDriveOdometry.hpp>
-#include <wpi/simulation/OnboardIMUSim.hpp>
-#include <wpi/simulation/DifferentialDrivetrainSim.hpp>
-#include <wpi/smartdashboard/Field2d.hpp>
-#include <wpi/commands2/SubsystemBase.hpp>
-#include <wpi/hal/SimDevice.hpp>
 #include <rev/SparkMax.h>
 #include <rev/SparkRelativeEncoder.h>
+
+#include <wpi/commands2/SubsystemBase.hpp>
+#include <wpi/drive/DifferentialDrive.hpp>
+#include <wpi/hal/SimDevice.hpp>
+#include <wpi/hardware/imu/OnboardIMU.hpp>
+#include <wpi/math/kinematics/DifferentialDriveOdometry.hpp>
+#include <wpi/simulation/DifferentialDrivetrainSim.hpp>
+#include <wpi/simulation/OnboardIMUSim.hpp>
+#include <wpi/smartdashboard/Field2d.hpp>
 #include <wpi/units/length.hpp>
 #include <wpi/units/velocity.hpp>
 

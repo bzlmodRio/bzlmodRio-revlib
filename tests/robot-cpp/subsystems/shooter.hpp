@@ -1,11 +1,12 @@
 #pragma once
 
-#include <wpi/simulation/FlywheelSim.hpp>
-#include <wpi/commands2/SubsystemBase.hpp>
-#include <wpi/hal/SimDevice.hpp>
 #include <rev/SparkClosedLoopController.h>
 #include <rev/SparkMax.h>
 #include <rev/SparkRelativeEncoder.h>
+
+#include <wpi/commands2/SubsystemBase.hpp>
+#include <wpi/hal/SimDevice.hpp>
+#include <wpi/simulation/FlywheelSim.hpp>
 
 class Shooter : public wpi::cmd::SubsystemBase {
  public:

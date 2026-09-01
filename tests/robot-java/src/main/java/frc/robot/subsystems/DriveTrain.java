@@ -87,7 +87,6 @@ public class DriveTrain extends SubsystemBase {
     SmartDashboard.putData("Field", m_field);
 
     if (RobotBase.isSimulation()) {
-
       SimDeviceSim leftDeviceSim =
           new SimDeviceSim("SPARK MAX [" + m_leftLeader.getDeviceId() + "] RELATIVE ENCODER");
       m_leftEncoderPositionSim = leftDeviceSim.getDouble("Position");

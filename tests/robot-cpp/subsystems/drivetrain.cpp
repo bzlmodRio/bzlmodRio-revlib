@@ -1,15 +1,15 @@
 #include "robot-cpp/subsystems/drivetrain.hpp"
 
-#include <wpi/driverstation/Joystick.hpp>
-#include <wpi/system/RobotController.hpp>
-#include <wpi/smartdashboard/SmartDashboard.hpp>
 #include <rev/config/SparkMaxConfig.h>
-#include <wpi/units/length.hpp>
 
 #include <iostream>
 #include <numbers>
+#include <wpi/driverstation/Joystick.hpp>
+#include <wpi/simulation/SimDeviceSim.hpp>
+#include <wpi/smartdashboard/SmartDashboard.hpp>
+#include <wpi/system/RobotController.hpp>
+#include <wpi/units/length.hpp>
 
-#include "wpi/simulation/SimDeviceSim.hpp"
 #include "robot-cpp/subsystems/ports.hpp"
 
 DriveTrain::DriveTrain()
@@ -29,7 +29,8 @@ DriveTrain::DriveTrain()
       m_gyroSim{},
       m_drivetrainSimulator(
           wpi::sim::DifferentialDrivetrainSim::CreateKitbotSim(
-              wpi::sim::DifferentialDrivetrainSim::KitbotMotor::DUAL_CIM_PER_SIDE,
+              wpi::sim::DifferentialDrivetrainSim::KitbotMotor::
+                  DUAL_CIM_PER_SIDE,
               12.0, 6_in)) {
   wpi::SmartDashboard::PutData("Field", &m_field);
 
@@ -82,7 +83,9 @@ double DriveTrain::GetHeadingDegrees() {
   return GetRotation().Degrees().to<double>();
 }
 
-wpi::math::Rotation2d DriveTrain::GetRotation() { return m_gyro.GetRotation2d(); }
+wpi::math::Rotation2d DriveTrain::GetRotation() {
+  return m_gyro.GetRotation2d();
+}
 
 void DriveTrain::Reset() {
   m_gyro.ResetYaw();
@@ -111,10 +114,11 @@ void DriveTrain::SimulationPeriodic() {
   // simulation, and write the simulated positions and velocities to our
   // simulated encoder and gyro. We negate the right side so that positive
   // voltages make the right side move forward.
-  m_drivetrainSimulator.SetInputs(wpi::units::volt_t{m_leftMotorA.GetThrottle()} *
-                                      wpi::RobotController::GetInputVoltage(),
-                                  wpi::units::volt_t{-m_rightMotorA.GetThrottle()} *
-                                      wpi::RobotController::GetInputVoltage());
+  m_drivetrainSimulator.SetInputs(
+      wpi::units::volt_t{m_leftMotorA.GetThrottle()} *
+          wpi::RobotController::GetInputVoltage(),
+      wpi::units::volt_t{-m_rightMotorA.GetThrottle()} *
+          wpi::RobotController::GetInputVoltage());
   m_drivetrainSimulator.Update(20_ms);
 
   m_leftEncoderPositionSim.Set(

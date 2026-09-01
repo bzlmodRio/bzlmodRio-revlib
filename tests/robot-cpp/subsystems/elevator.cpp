@@ -1,9 +1,10 @@
 #include "robot-cpp/subsystems/elevator.hpp"
 
-#include <wpi/system/RobotController.hpp>
+#include <rev/config/SparkMaxConfig.h>
+
 #include <wpi/math/controller/PIDController.hpp>
 #include <wpi/smartdashboard/SmartDashboard.hpp>
-#include <rev/config/SparkMaxConfig.h>
+#include <wpi/system/RobotController.hpp>
 
 #include "robot-cpp/subsystems/ports.hpp"
 
@@ -23,7 +24,8 @@ wpi::math::DCMotor kElevatorGearbox = wpi::math::DCMotor::Vex775Pro(4);
 }  // namespace
 
 Elevator::Elevator()
-    : m_motor{0, kElevatorMotorPort, rev::spark::SparkMax::MotorType::kBrushless},
+    : m_motor{0, kElevatorMotorPort,
+              rev::spark::SparkMax::MotorType::kBrushless},
       m_encoder(m_motor.GetEncoder()),
       m_controller(m_motor.GetClosedLoopController()),
       m_elevatorSim(kElevatorGearbox, kElevatorGearing, kCarriageMass,

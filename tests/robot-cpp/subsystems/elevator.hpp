@@ -1,10 +1,11 @@
 #pragma once
 
-#include <wpi/simulation/ElevatorSim.hpp>
-#include <wpi/commands2/Subsystem.hpp>
-#include <wpi/hal/SimDevice.hpp>
 #include <rev/SparkMax.h>
 #include <rev/SparkRelativeEncoder.h>
+
+#include <wpi/commands2/Subsystem.hpp>
+#include <wpi/hal/SimDevice.hpp>
+#include <wpi/simulation/ElevatorSim.hpp>
 #include <wpi/units/length.hpp>
 
 class Elevator : public wpi::cmd::Subsystem {
