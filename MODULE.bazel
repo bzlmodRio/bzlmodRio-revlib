@@ -1,8 +1,9 @@
 module(
     name = "bzlmodrio-revlib",
-    version = "2027.0.0-alpha-3",
+    version = "2027.0.0-alpha-6",
 )
 
+bazel_dep(name = "buildifier_prebuilt", version = "8.5.1.2")
 bazel_dep(name = "platforms", version = "0.0.11")
 bazel_dep(name = "rules_cc", version = "0.2.13")
 bazel_dep(name = "rules_java", version = "8.16.1")
@@ -11,9 +12,9 @@ bazel_dep(name = "rules_bzlmodrio_jdk", version = "17.0.12-7.bcr1")
 bazel_dep(name = "bzlmodrio-allwpilib", version = "2027.0.0-alpha-6")
 bazel_dep(name = "bzlmodrio-opencv", version = "2027.4.13.0-3")
 
-setup_bzlmodrio_revlib_cpp_dependencies = use_extension("//:maven_cpp_deps.bzl", "setup_bzlmodrio_revlib_cpp_dependencies")
+deps = use_extension("//:maven_cpp_deps.bzl", "deps")
 use_repo(
-    setup_bzlmodrio_revlib_cpp_dependencies,
+    deps,
     "bazelrio_com_revrobotics_frc_revlib-cpp_headers",
     "bazelrio_com_revrobotics_frc_revlib-cpp_linuxarm64",
     "bazelrio_com_revrobotics_frc_revlib-cpp_linuxarm64static",
