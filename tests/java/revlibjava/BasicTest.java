@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 class BasicTest {
   @Test
   void basicTest() {
-    SparkMax sparkMax = new SparkMax(1, MotorType.kBrushless);
+    SparkMax sparkMax = new SparkMax(0, 1, MotorType.kBrushless);
     System.out.println(sparkMax);
   }
 }

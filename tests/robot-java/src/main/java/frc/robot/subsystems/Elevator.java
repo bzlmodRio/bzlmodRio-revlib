@@ -7,15 +7,15 @@ import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
-import edu.wpi.first.hal.SimDouble;
-import edu.wpi.first.math.system.plant.DCMotor;
-import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.simulation.ElevatorSim;
-import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Subsystem;
+import org.wpilib.command2.Subsystem;
+import org.wpilib.framework.RobotBase;
+import org.wpilib.hardware.hal.SimDouble;
+import org.wpilib.math.system.DCMotor;
+import org.wpilib.math.util.Units;
+import org.wpilib.simulation.ElevatorSim;
+import org.wpilib.simulation.SimDeviceSim;
+import org.wpilib.smartdashboard.SmartDashboard;
+import org.wpilib.system.RobotController;
 
 public class Elevator implements Subsystem {
   private static final double kP = 4;
@@ -46,7 +46,7 @@ public class Elevator implements Subsystem {
   /** Create a new elevator subsystem. */
   @SuppressWarnings("this-escape")
   public Elevator() {
-    m_motor = new SparkMax(PortMap.kElevatorMotorPort, SparkMax.MotorType.kBrushless);
+    m_motor = new SparkMax(0, PortMap.kElevatorMotorPort, SparkMax.MotorType.kBrushless);
     SparkMaxConfig motorConfig = new SparkMaxConfig();
     motorConfig.encoder.positionConversionFactor(kArmEncoderDistPerPulse);
     motorConfig.closedLoop.p(kP);
@@ -73,7 +73,7 @@ public class Elevator implements Subsystem {
   }
 
   public void log() {
-    SmartDashboard.putNumber("Elevator Height", m_encoder.getPosition());
+    SmartDashboard.putNumber("Elevator Height", m_encoder.getPosition().get());
   }
 
   public void goToHeight(double height) {
@@ -82,7 +82,7 @@ public class Elevator implements Subsystem {
   }
 
   public boolean isAtHeight() {
-    return Math.abs(m_goalHeight - m_encoder.getPosition()) < 0.05;
+    return Math.abs(m_goalHeight - m_encoder.getPosition().get()) < 0.05;
   }
 
   @Override
@@ -92,12 +92,12 @@ public class Elevator implements Subsystem {
 
   @Override
   public void simulationPeriodic() {
-    m_elevatorSim.setInput(m_motor.get() * RobotController.getInputVoltage());
+    m_elevatorSim.setInput(m_motor.getThrottle() * RobotController.getInputVoltage());
     m_elevatorSim.update(0.02);
-    m_encoderPositionSim.set(m_elevatorSim.getPositionMeters());
+    m_encoderPositionSim.set(m_elevatorSim.getPosition());
   }
 
   public void stop() {
-    m_motor.set(0);
+    m_motor.setThrottle(0);
   }
 }

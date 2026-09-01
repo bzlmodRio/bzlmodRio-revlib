@@ -1,10 +1,10 @@
 #include "robot-cpp/subsystems/elevator.hpp"
 
-#include <frc/RobotController.h>
-#include <frc/controller/PIDController.h>
-#include <frc/livewindow/LiveWindow.h>
-#include <frc/smartdashboard/SmartDashboard.h>
 #include <rev/config/SparkMaxConfig.h>
+
+#include <wpi/math/controller/PIDController.hpp>
+#include <wpi/smartdashboard/SmartDashboard.hpp>
+#include <wpi/system/RobotController.hpp>
 
 #include "robot-cpp/subsystems/ports.hpp"
 
@@ -14,22 +14,23 @@ constexpr double kI = 0.0;
 constexpr double kD = 0.0;
 
 constexpr double kElevatorGearing = 10.0;
-constexpr units::meter_t kElevatorDrumRadius = 2_in;
-constexpr units::kilogram_t kCarriageMass = 4.0_kg;
+constexpr wpi::units::meter_t kElevatorDrumRadius = 2_in;
+constexpr wpi::units::kilogram_t kCarriageMass = 4.0_kg;
 
-constexpr units::meter_t kMinElevatorHeight = 0_in;
-constexpr units::meter_t kMaxElevatorHeight = 50_in;
+constexpr wpi::units::meter_t kMinElevatorHeight = 0_in;
+constexpr wpi::units::meter_t kMaxElevatorHeight = 50_in;
 
-frc::DCMotor kElevatorGearbox = frc::DCMotor::Vex775Pro(4);
+wpi::math::DCMotor kElevatorGearbox = wpi::math::DCMotor::Vex775Pro(4);
 }  // namespace
 
 Elevator::Elevator()
-    : m_motor{kElevatorMotorPort, rev::spark::SparkMax::MotorType::kBrushless},
+    : m_motor{0, kElevatorMotorPort,
+              rev::spark::SparkMax::MotorType::kBrushless},
       m_encoder(m_motor.GetEncoder()),
       m_controller(m_motor.GetClosedLoopController()),
       m_elevatorSim(kElevatorGearbox, kElevatorGearing, kCarriageMass,
                     kElevatorDrumRadius, kMinElevatorHeight, kMaxElevatorHeight,
-                    true, units::meter_t{0}) {
+                    true, wpi::units::meter_t{0}) {
   rev::spark::SparkMaxConfig motorConfig;
   motorConfig.closedLoop.P(kP);
   motorConfig.closedLoop.I(kI);
@@ -40,19 +41,19 @@ Elevator::Elevator()
 }
 
 void Elevator::Log() {
-  frc::SmartDashboard::PutNumber("Elevator Height (m)",
+  wpi::SmartDashboard::PutNumber("Elevator Height (m)",
                                  GetElevatorHeight().to<double>());
 }
 
-units::meter_t Elevator::GetElevatorHeight() {
-  return units::meter_t{m_encoder.GetPosition()};
+wpi::units::meter_t Elevator::GetElevatorHeight() {
+  return wpi::units::meter_t{m_encoder.GetPosition().Get()};
 }
 
 bool Elevator::IsAtHeight() {
-  return (GetElevatorHeight() - m_setpoint) < units::inch_t(2);
+  return (GetElevatorHeight() - m_setpoint) < wpi::units::inch_t(2);
 }
 
-void Elevator::GoToHeight(units::meter_t height) {
+void Elevator::GoToHeight(wpi::units::meter_t height) {
   m_setpoint = height;
   m_controller.SetSetpoint(height.to<double>(),
                            rev::spark::SparkLowLevel::ControlType::kPosition);
@@ -62,9 +63,9 @@ void Elevator::Periodic() { Log(); }
 
 void Elevator::SimulationPeriodic() {
   m_elevatorSim.SetInput(Eigen::Vector<double, 1>(
-      m_motor.Get() * frc::RobotController::GetInputVoltage()));
+      m_motor.GetThrottle() * wpi::RobotController::GetInputVoltage()));
   m_elevatorSim.Update(20_ms);
   m_encoderPositionSim.Set(m_elevatorSim.GetPosition().to<double>());
 }
 
-void Elevator::Stop() { m_motor.Set(0); }
+void Elevator::Stop() { m_motor.SetThrottle(0); }
