@@ -96,6 +96,8 @@ def __setup_bzlmodrio_revlib_cpp_dependencies(mctx):
             "install_name_tool -id @rpath/libREVLib.dylib osx/universal/shared/libREVLib.dylib",
             "install_name_tool -change libREVLibDriver.dylib @rpath/libREVLibDriver.dylib osx/universal/shared/libREVLib.dylib",
             "install_name_tool -change libdatalog.dylib @rpath/libdatalog.dylib osx/universal/shared/libREVLib.dylib",
+            "install_name_tool -change libdrivers.dylib @rpath/libdrivers.dylib osx/universal/shared/libREVLib.dylib",
+            "install_name_tool -change libfields.dylib @rpath/libfields.dylib osx/universal/shared/libREVLib.dylib",
             "install_name_tool -change libntcore.dylib @rpath/libntcore.dylib osx/universal/shared/libREVLib.dylib",
             "install_name_tool -change libtelemetry.dylib @rpath/libtelemetry.dylib osx/universal/shared/libREVLib.dylib",
             "install_name_tool -change libtunables.dylib @rpath/libtunables.dylib osx/universal/shared/libREVLib.dylib",

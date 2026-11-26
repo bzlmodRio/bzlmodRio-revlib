@@ -3,8 +3,8 @@
 #include <rev/config/SparkMaxConfig.h>
 
 #include <wpi/math/controller/PIDController.hpp>
-#include <wpi/telemetry/Telemetry.hpp>
 #include <wpi/system/RobotController.hpp>
+#include <wpi/telemetry/Telemetry.hpp>
 
 #include "robot-cpp/subsystems/ports.hpp"
 
@@ -41,8 +41,7 @@ Elevator::Elevator()
 }
 
 void Elevator::Log() {
-  wpi::telemetry::Log("Elevator Height (m)",
-                                 GetElevatorHeight().to<double>());
+  wpi::telemetry::Log("Elevator Height (m)", GetElevatorHeight().to<double>());
 }
 
 wpi::units::meter_t Elevator::GetElevatorHeight() {

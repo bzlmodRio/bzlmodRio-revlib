@@ -1,8 +1,8 @@
 #include "robot-cpp/subsystems/shooter.hpp"
 
 #include <wpi/math/system/Models.hpp>
-#include <wpi/telemetry/Telemetry.hpp>
 #include <wpi/system/RobotController.hpp>
+#include <wpi/telemetry/Telemetry.hpp>
 
 #include "robot-cpp/subsystems/ports.hpp"
 

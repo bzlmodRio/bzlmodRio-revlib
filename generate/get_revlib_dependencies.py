@@ -37,6 +37,8 @@ def get_revlib_dependencies(
                 deps=[
                     "REVLib-driver",
                     allwpilib_dependency.container.get_cc_dependency("wpilibc-cpp"),
+                    allwpilib_dependency.container.get_cc_dependency("drivers-cpp"),
+                    allwpilib_dependency.container.get_cc_dependency("fields-cpp"),
                 ],
             ),
             "REVLib-driver": dict(
@@ -68,6 +70,9 @@ def get_revlib_dependencies(
             "RevLibBackendDriver",
             "RevLibWpiBackendDriver",
             "wpilibc-cpp",
+            "drivers-cpp",
+            "fields-cpp",
+            "mrclib-cpp",
         ],
         platform_deps={},
         jni_deps={
