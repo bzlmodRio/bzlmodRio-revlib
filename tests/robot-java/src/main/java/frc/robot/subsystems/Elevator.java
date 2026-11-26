@@ -9,13 +9,14 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import org.wpilib.command2.Subsystem;
 import org.wpilib.framework.RobotBase;
+import org.wpilib.hardware.bus.CANPort;
 import org.wpilib.hardware.hal.SimDouble;
 import org.wpilib.math.system.DCMotor;
 import org.wpilib.math.util.Units;
 import org.wpilib.simulation.ElevatorSim;
 import org.wpilib.simulation.SimDeviceSim;
-import org.wpilib.smartdashboard.SmartDashboard;
 import org.wpilib.system.RobotController;
+import org.wpilib.telemetry.Telemetry;
 
 public class Elevator implements Subsystem {
   private static final double kP = 4;
@@ -29,8 +30,6 @@ public class Elevator implements Subsystem {
   private static final DCMotor kElevatorGearbox = DCMotor.getVex775Pro(4);
   private static final double kMinElevatorHeight = Units.inchesToMeters(0);
   private static final double kMaxElevatorHeight = Units.inchesToMeters(50);
-
-  private static final double kArmEncoderDistPerPulse = 2.0 * 3.14 * kElevatorDrumRadius / 4096.0;
 
   private final SparkMax m_motor;
   private final RelativeEncoder m_encoder;
@@ -46,9 +45,9 @@ public class Elevator implements Subsystem {
   /** Create a new elevator subsystem. */
   @SuppressWarnings("this-escape")
   public Elevator() {
-    m_motor = new SparkMax(0, PortMap.kElevatorMotorPort, SparkMax.MotorType.kBrushless);
+    m_motor =
+        new SparkMax(CANPort.CAN_S0, PortMap.kElevatorMotorPort, SparkMax.MotorType.kBrushless);
     SparkMaxConfig motorConfig = new SparkMaxConfig();
-    motorConfig.encoder.positionConversionFactor(kArmEncoderDistPerPulse);
     motorConfig.closedLoop.p(kP);
     motorConfig.closedLoop.i(kI);
     motorConfig.closedLoop.d(kD);
@@ -73,7 +72,7 @@ public class Elevator implements Subsystem {
   }
 
   public void log() {
-    SmartDashboard.putNumber("Elevator Height", m_encoder.getPosition().get());
+    Telemetry.log("Elevator Height", m_encoder.getPosition().get());
   }
 
   public void goToHeight(double height) {

@@ -6,21 +6,21 @@
 #include <numbers>
 #include <wpi/driverstation/Joystick.hpp>
 #include <wpi/simulation/SimDeviceSim.hpp>
-#include <wpi/smartdashboard/SmartDashboard.hpp>
 #include <wpi/system/RobotController.hpp>
+#include <wpi/telemetry/Telemetry.hpp>
 #include <wpi/units/length.hpp>
 
 #include "robot-cpp/subsystems/ports.hpp"
 
 DriveTrain::DriveTrain()
-    : m_leftMotorA{0, kDrivetrainMotorLeftAPort,
+    : m_leftMotorA{wpi::CANPort::CAN_S0, kDrivetrainMotorLeftAPort,
                    rev::spark::SparkMax::MotorType::kBrushless},
-      m_leftMotorB{0, kDrivetrainMotorLeftBPort,
+      m_leftMotorB{wpi::CANPort::CAN_S0, kDrivetrainMotorLeftBPort,
                    rev::spark::SparkMax::MotorType::kBrushless},
       m_leftEncoder{m_leftMotorA.GetEncoder()},
-      m_rightMotorA{0, kDrivetrainMotorRightAPort,
+      m_rightMotorA{wpi::CANPort::CAN_S0, kDrivetrainMotorRightAPort,
                     rev::spark::SparkMax::MotorType::kBrushless},
-      m_rightMotorB{0, kDrivetrainMotorRightBPort,
+      m_rightMotorB{wpi::CANPort::CAN_S0, kDrivetrainMotorRightBPort,
                     rev::spark::SparkMax::MotorType::kBrushless},
       m_rightEncoder{m_rightMotorA.GetEncoder()},
       m_gyro(wpi::OnboardIMU::FLAT),
@@ -32,8 +32,6 @@ DriveTrain::DriveTrain()
               wpi::sim::DifferentialDrivetrainSim::KitbotMotor::
                   DUAL_CIM_PER_SIDE,
               12.0, 6_in)) {
-  wpi::SmartDashboard::PutData("Field", &m_field);
-
   wpi::sim::SimDeviceSim leftDeviceSim(
       ("SPARK MAX [" + std::to_string(m_leftMotorA.GetDeviceId()) + "]")
           .c_str());
@@ -64,15 +62,12 @@ DriveTrain::DriveTrain()
 }
 
 void DriveTrain::Log() {
-  wpi::SmartDashboard::PutNumber("Left Distance",
-                                 GetLeftEncoderDistance().to<double>());
-  wpi::SmartDashboard::PutNumber("Right Distance",
-                                 GetRightEncoderDistance().to<double>());
-  wpi::SmartDashboard::PutNumber("Left Speed",
-                                 GetLeftEncoderVelocity().to<double>());
-  wpi::SmartDashboard::PutNumber("Right Speed",
-                                 GetRightEncoderVelocity().to<double>());
-  wpi::SmartDashboard::PutNumber("Gyro", GetHeadingDegrees());
+  wpi::telemetry::Log("Left Distance", GetLeftEncoderDistance().to<double>());
+  wpi::telemetry::Log("Right Distance", GetRightEncoderDistance().to<double>());
+  wpi::telemetry::Log("Left Speed", GetLeftEncoderVelocity().to<double>());
+  wpi::telemetry::Log("Right Speed", GetRightEncoderVelocity().to<double>());
+  wpi::telemetry::Log("Gyro", GetHeadingDegrees());
+  wpi::telemetry::Log("Field", m_field);
 }
 
 void DriveTrain::ArcadeDrive(double throttle, double rotation) {

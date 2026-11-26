@@ -9,7 +9,7 @@ def get_revlib_dependencies(
     use_local_allwpilib=False,
     use_local_opencv=False,
     use_local_ni=False,
-    allwpilib_version_override="2027.0.0-alpha-6",
+    allwpilib_version_override="2027.0.0-alpha-8",
     opencv_version_override="2027.4.13.0-3",
 ):
     SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -37,6 +37,8 @@ def get_revlib_dependencies(
                 deps=[
                     "REVLib-driver",
                     allwpilib_dependency.container.get_cc_dependency("wpilibc-cpp"),
+                    allwpilib_dependency.container.get_cc_dependency("drivers-cpp"),
+                    allwpilib_dependency.container.get_cc_dependency("fields-cpp"),
                 ],
             ),
             "REVLib-driver": dict(
@@ -68,6 +70,9 @@ def get_revlib_dependencies(
             "RevLibBackendDriver",
             "RevLibWpiBackendDriver",
             "wpilibc-cpp",
+            "drivers-cpp",
+            "fields-cpp",
+            "mrclib-cpp",
         ],
         platform_deps={},
         jni_deps={

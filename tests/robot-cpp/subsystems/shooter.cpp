@@ -1,8 +1,8 @@
 #include "robot-cpp/subsystems/shooter.hpp"
 
 #include <wpi/math/system/Models.hpp>
-#include <wpi/smartdashboard/SmartDashboard.hpp>
 #include <wpi/system/RobotController.hpp>
+#include <wpi/telemetry/Telemetry.hpp>
 
 #include "robot-cpp/subsystems/ports.hpp"
 
@@ -20,7 +20,7 @@ wpi::sim::FlywheelSim flywheelSim{kPlant, kGearbox};
 }  // namespace
 
 Shooter::Shooter()
-    : m_motor{0, kShooterMotorPort,
+    : m_motor{wpi::CANPort::CAN_S0, kShooterMotorPort,
               rev::spark::SparkMax::MotorType::kBrushless},
       m_encoder(m_motor.GetEncoder()),
       m_controller(m_motor.GetClosedLoopController()),
@@ -50,6 +50,6 @@ void Shooter::SimulationPeriodic() {
 }
 
 void Shooter::Log() {
-  wpi::SmartDashboard::PutNumber("Shooter Speed", m_motor.GetThrottle());
-  wpi::SmartDashboard::PutNumber("Shooter RPM", GetRpm().to<double>());
+  wpi::telemetry::Log("Shooter Speed", m_motor.GetThrottle());
+  wpi::telemetry::Log("Shooter RPM", GetRpm().to<double>());
 }

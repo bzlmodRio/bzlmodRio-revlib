@@ -3,8 +3,8 @@
 #include <rev/config/SparkMaxConfig.h>
 
 #include <wpi/math/controller/PIDController.hpp>
-#include <wpi/smartdashboard/SmartDashboard.hpp>
 #include <wpi/system/RobotController.hpp>
+#include <wpi/telemetry/Telemetry.hpp>
 
 #include "robot-cpp/subsystems/ports.hpp"
 
@@ -24,7 +24,7 @@ wpi::math::DCMotor kElevatorGearbox = wpi::math::DCMotor::Vex775Pro(4);
 }  // namespace
 
 Elevator::Elevator()
-    : m_motor{0, kElevatorMotorPort,
+    : m_motor{wpi::CANPort::CAN_S0, kElevatorMotorPort,
               rev::spark::SparkMax::MotorType::kBrushless},
       m_encoder(m_motor.GetEncoder()),
       m_controller(m_motor.GetClosedLoopController()),
@@ -41,8 +41,7 @@ Elevator::Elevator()
 }
 
 void Elevator::Log() {
-  wpi::SmartDashboard::PutNumber("Elevator Height (m)",
-                                 GetElevatorHeight().to<double>());
+  wpi::telemetry::Log("Elevator Height (m)", GetElevatorHeight().to<double>());
 }
 
 wpi::units::meter_t Elevator::GetElevatorHeight() {

@@ -3,7 +3,7 @@ load("@rules_cc//cc:defs.bzl", "cc_library")
 cc_library(
     name = "shared_interface",
     srcs = select({
-        "@rules_bzlmodrio_toolchains//conditions:windows_x86_64": ["@bazelrio_com_revrobotics_frc_revlibwpibackenddriver_windowsx86-64//:shared_interface"],
+        "@wpilib_toolchains//conditions:windows_x86_64": ["@bazelrio_com_revrobotics_frc_revlibwpibackenddriver_windowsx86-64//:shared_interface"],
     }),
     linkstatic = True,
     tags = ["manual"],
@@ -13,11 +13,11 @@ cc_library(
 filegroup(
     name = "shared_raw",
     srcs = select({
-        "@rules_bzlmodrio_toolchains//conditions:linux_x86_64": ["@bazelrio_com_revrobotics_frc_revlibwpibackenddriver_linuxx86-64//:shared"],
-        "@rules_bzlmodrio_toolchains//conditions:osx": ["@bazelrio_com_revrobotics_frc_revlibwpibackenddriver_osxuniversal//:shared"],
-        "@rules_bzlmodrio_toolchains//conditions:windows_x86_64": ["@bazelrio_com_revrobotics_frc_revlibwpibackenddriver_windowsx86-64//:shared"],
-        "@rules_bzlmodrio_toolchains//constraints/is_bookworm64:bookworm64": ["@bazelrio_com_revrobotics_frc_revlibwpibackenddriver_linuxarm64//:shared"],
-        "@rules_bzlmodrio_toolchains//constraints/is_systemcore:systemcore": ["@bazelrio_com_revrobotics_frc_revlibwpibackenddriver_linuxsystemcore//:shared"],
+        "@wpilib_toolchains//conditions:linux_x86_64": ["@bazelrio_com_revrobotics_frc_revlibwpibackenddriver_linuxx86-64//:shared"],
+        "@wpilib_toolchains//conditions:osx": ["@bazelrio_com_revrobotics_frc_revlibwpibackenddriver_osxuniversal//:shared"],
+        "@wpilib_toolchains//conditions:windows_x86_64": ["@bazelrio_com_revrobotics_frc_revlibwpibackenddriver_windowsx86-64//:shared"],
+        "@wpilib_toolchains//constraints/is_systemcore:systemcore": ["@bazelrio_com_revrobotics_frc_revlibwpibackenddriver_linuxsystemcore//:shared"],
+        "@wpilib_toolchains//constraints/is_trixie64:trixie64": ["@bazelrio_com_revrobotics_frc_revlibwpibackenddriver_linuxarm64//:shared"],
         "//conditions:default": [],
     }),
     visibility = ["@bzlmodrio-revlib//:__subpackages__"],
@@ -28,8 +28,8 @@ cc_library(
     srcs = [":shared_raw"],
     visibility = ["@bzlmodrio-revlib//:__subpackages__"],
     deps = [] + select({
-        "@rules_bzlmodrio_toolchains//conditions:windows_arm64": [":shared_interface"],
-        "@rules_bzlmodrio_toolchains//conditions:windows_x86_64": [":shared_interface"],
+        "@wpilib_toolchains//conditions:windows_arm64": [":shared_interface"],
+        "@wpilib_toolchains//conditions:windows_x86_64": [":shared_interface"],
         "//conditions:default": [],
     }),
     alwayslink = 1,
@@ -40,10 +40,10 @@ cc_library(
     linkstatic = 1,
     visibility = ["@bzlmodrio-revlib//:__subpackages__"],
     deps = select({
-        "@rules_bzlmodrio_toolchains//conditions:linux_x86_64": ["@bazelrio_com_revrobotics_frc_revlibwpibackenddriver_linuxx86-64static//:static_libs"],
-        "@rules_bzlmodrio_toolchains//conditions:osx": ["@bazelrio_com_revrobotics_frc_revlibwpibackenddriver_osxuniversalstatic//:static_libs"],
-        "@rules_bzlmodrio_toolchains//conditions:windows_x86_64": ["@bazelrio_com_revrobotics_frc_revlibwpibackenddriver_windowsx86-64static//:static_libs"],
-        "@rules_bzlmodrio_toolchains//constraints/is_bookworm64:bookworm64": ["@bazelrio_com_revrobotics_frc_revlibwpibackenddriver_linuxarm64static//:static_libs"],
-        "@rules_bzlmodrio_toolchains//constraints/is_systemcore:systemcore": ["@bazelrio_com_revrobotics_frc_revlibwpibackenddriver_linuxsystemcorestatic//:static_libs"],
+        "@wpilib_toolchains//conditions:linux_x86_64": ["@bazelrio_com_revrobotics_frc_revlibwpibackenddriver_linuxx86-64static//:static_libs"],
+        "@wpilib_toolchains//conditions:osx": ["@bazelrio_com_revrobotics_frc_revlibwpibackenddriver_osxuniversalstatic//:static_libs"],
+        "@wpilib_toolchains//conditions:windows_x86_64": ["@bazelrio_com_revrobotics_frc_revlibwpibackenddriver_windowsx86-64static//:static_libs"],
+        "@wpilib_toolchains//constraints/is_systemcore:systemcore": ["@bazelrio_com_revrobotics_frc_revlibwpibackenddriver_linuxsystemcorestatic//:static_libs"],
+        "@wpilib_toolchains//constraints/is_trixie64:trixie64": ["@bazelrio_com_revrobotics_frc_revlibwpibackenddriver_linuxarm64static//:static_libs"],
     }),
 )
