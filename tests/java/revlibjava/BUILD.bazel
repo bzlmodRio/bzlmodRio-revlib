@@ -38,6 +38,7 @@ bazelrio_java_test(
         "@maven//:org_junit_platform_junit_platform_suite_api",
     ],
     deps = [
+        "@bzlmodrio-allwpilib//libraries/java/wpilibj",
         "@bzlmodrio-revlib//libraries/java/revlib-java",
         "@maven//:org_junit_jupiter_junit_jupiter_api",
         "@maven//:org_junit_jupiter_junit_jupiter_engine",

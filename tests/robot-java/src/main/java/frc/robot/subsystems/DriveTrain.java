@@ -12,6 +12,7 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import org.wpilib.command2.SubsystemBase;
 import org.wpilib.drive.DifferentialDrive;
 import org.wpilib.framework.RobotBase;
+import org.wpilib.hardware.bus.CANPort;
 import org.wpilib.hardware.hal.SimDouble;
 import org.wpilib.hardware.imu.OnboardIMU;
 import org.wpilib.math.kinematics.DifferentialDriveOdometry;
@@ -19,8 +20,8 @@ import org.wpilib.simulation.DifferentialDrivetrainSim;
 import org.wpilib.simulation.OnboardIMUSim;
 import org.wpilib.simulation.SimDeviceSim;
 import org.wpilib.smartdashboard.Field2d;
-import org.wpilib.smartdashboard.SmartDashboard;
 import org.wpilib.system.RobotController;
+import org.wpilib.telemetry.Telemetry;
 
 public class DriveTrain extends SubsystemBase {
   private final SparkMax m_leftLeader;
@@ -47,29 +48,32 @@ public class DriveTrain extends SubsystemBase {
 
   public DriveTrain() {
     SparkMaxConfig baseConfig = new SparkMaxConfig();
-    baseConfig.encoder.positionConversionFactor((4.0 / 12.0 * Math.PI) / 360.0);
 
     m_leftLeader =
-        new SparkMax(0, PortMap.kDrivetrainMotorLeftAPort, SparkMax.MotorType.kBrushless);
+        new SparkMax(
+            CANPort.CAN_S0, PortMap.kDrivetrainMotorLeftAPort, SparkMax.MotorType.kBrushless);
     SparkMaxConfig leftLeaderConfig = new SparkMaxConfig().apply(baseConfig);
     m_leftLeader.configure(
         leftLeaderConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     m_leftFollower =
-        new SparkMax(0, PortMap.kDrivetrainMotorLeftBPort, SparkMax.MotorType.kBrushless);
+        new SparkMax(
+            CANPort.CAN_S0, PortMap.kDrivetrainMotorLeftBPort, SparkMax.MotorType.kBrushless);
     SparkMaxConfig leftFollowerConfig = new SparkMaxConfig().apply(leftLeaderConfig);
     leftFollowerConfig.follow(m_leftLeader);
     m_leftLeader.configure(
         leftFollowerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     m_rightLeader =
-        new SparkMax(0, PortMap.kDrivetrainMotorRightAPort, SparkMax.MotorType.kBrushless);
+        new SparkMax(
+            CANPort.CAN_S0, PortMap.kDrivetrainMotorRightAPort, SparkMax.MotorType.kBrushless);
     SparkMaxConfig rightLeaderConfig = new SparkMaxConfig().apply(baseConfig);
     m_rightLeader.configure(
         rightLeaderConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     m_rightFollower =
-        new SparkMax(0, PortMap.kDrivetrainMotorRightBPort, SparkMax.MotorType.kBrushless);
+        new SparkMax(
+            CANPort.CAN_S0, PortMap.kDrivetrainMotorRightBPort, SparkMax.MotorType.kBrushless);
     SparkMaxConfig rightFollowerConfig = new SparkMaxConfig().apply(rightLeaderConfig);
     rightFollowerConfig.follow(m_rightLeader);
     m_rightFollower.configure(
@@ -83,8 +87,6 @@ public class DriveTrain extends SubsystemBase {
 
     m_odometry = new DifferentialDriveOdometry(m_gyro.getRotation2d(), 0, 0);
     m_field = new Field2d();
-
-    SmartDashboard.putData("Field", m_field);
 
     if (RobotBase.isSimulation()) {
       SimDeviceSim leftDeviceSim =
@@ -109,11 +111,12 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void log() {
-    SmartDashboard.putNumber("Left Distance", m_leftEncoder.getPosition().get());
-    SmartDashboard.putNumber("Right Distance", m_rightEncoder.getPosition().get());
-    SmartDashboard.putNumber("Left Speed", m_leftEncoder.getVelocity().get());
-    SmartDashboard.putNumber("Right Speed", m_rightEncoder.getVelocity().get());
-    SmartDashboard.putNumber("Gyro", m_gyro.getYawRadians());
+    Telemetry.log("Left Distance", m_leftEncoder.getPosition().get());
+    Telemetry.log("Right Distance", m_rightEncoder.getPosition().get());
+    Telemetry.log("Left Speed", m_leftEncoder.getVelocity().get());
+    Telemetry.log("Right Speed", m_rightEncoder.getVelocity().get());
+    Telemetry.log("Gyro", m_gyro.getYawRadians());
+    Telemetry.log("Field", m_field);
   }
 
   public void arcadeDrive(double throttle, double rotation) {

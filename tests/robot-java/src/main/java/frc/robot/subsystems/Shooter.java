@@ -13,6 +13,7 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import org.wpilib.command2.SubsystemBase;
 import org.wpilib.framework.RobotBase;
+import org.wpilib.hardware.bus.CANPort;
 import org.wpilib.hardware.hal.SimDouble;
 import org.wpilib.math.numbers.N1;
 import org.wpilib.math.system.DCMotor;
@@ -20,8 +21,8 @@ import org.wpilib.math.system.LinearSystem;
 import org.wpilib.math.system.Models;
 import org.wpilib.simulation.FlywheelSim;
 import org.wpilib.simulation.SimDeviceSim;
-import org.wpilib.smartdashboard.SmartDashboard;
 import org.wpilib.system.RobotController;
+import org.wpilib.telemetry.Telemetry;
 
 /**
  * The claw subsystem is a simple system with a motor for opening and closing. If using stronger
@@ -47,7 +48,8 @@ public class Shooter extends SubsystemBase {
 
   /** Create a new claw subsystem. */
   public Shooter() {
-    m_motor = new SparkMax(0, PortMap.kShooterMotorPort, SparkBase.MotorType.kBrushless);
+    m_motor =
+        new SparkMax(CANPort.CAN_S0, PortMap.kShooterMotorPort, SparkBase.MotorType.kBrushless);
     SparkMaxConfig motorConfig = new SparkMaxConfig();
     motorConfig.closedLoop.p(kP);
     motorConfig.closedLoop.i(kI);
@@ -69,8 +71,8 @@ public class Shooter extends SubsystemBase {
   }
 
   public void log() {
-    SmartDashboard.putNumber("Shooter Speed", m_motor.getThrottle());
-    SmartDashboard.putNumber("Shooter RPM", getRpm());
+    Telemetry.log("Shooter Speed", m_motor.getThrottle());
+    Telemetry.log("Shooter RPM", getRpm());
   }
 
   public void stop() {

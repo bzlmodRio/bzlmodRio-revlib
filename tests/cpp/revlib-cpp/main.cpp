@@ -8,7 +8,7 @@
 int main() {
   std::cout << "Hello World" << std::endl;
 
-  rev::spark::SparkMax sparkMax{0, 3,
+  rev::spark::SparkMax sparkMax{wpi::CANPort::CAN_S0, 3,
                                 rev::spark::SparkMax::MotorType::kBrushless};
 
   std::cout << "Running  some loops" << std::endl;
